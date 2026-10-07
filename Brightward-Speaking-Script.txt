@@ -1,0 +1,39 @@
+Slide 1 - Manual root-cause analysis (48s)
+
+Hi everyone, thank you for joining. For those I haven't met, I'm TJ Feneran, AI Architect based here in New York City. Today we'll be continuing our discussion on how you, the fictitious company "Brightward Media", can leverage OpenAI's Platform to help ensure your streaming video platform is running smoothly, and that incidents can be addressed and remediated as quickly as possible.
+
+As we learned in our last discussion, Brightward and its Site Reliability Engineering team are currently running a self-built platform, preferring build-over-buy tooling to monitor the health of your infrastructure and applications. In this session, we'll show how your existing tooling can be extended to take advantage of your existing proprietary data and combine it with OpenAI's platform and AI models to enable faster triage and reduced time to remediation.
+
+Slide 2 - The OpenAI Platform & API (47s)
+
+The OpenAI Platform and API provide the building blocks. A built-in vector store holds operational knowledge that can be searched semantically, and File Search retrieves relevant passages from your company's runbooks and historical cases. The proposed architecture is a retrieval-augmented-generation workflow which uses the Responses API and File Search to produce cited guidance for engineer review. An Agent can combine a model, customer-defined instructions, and optional third-party tools to help guide an investigation by combining your data with the powerful reasoning of OpenAI's models.
+
+A further milestone would be to implement a human-in-the-loop approval action that can trigger a remediation process, and ultimately auto-remediation for low-risk cases. So with that, let’s see the Platform and the workflow.
+
+Demo between slides 2 and 3 (128s)
+
+Your current monitoring system is aggregating metrics, logs, and traces across your cloud environment and is able to surface alerts based on static thresholds and ML-based anomaly detection. When an SRE receives an alert, current processes involve sifting through runbooks manually, piecing together information from disparate data sources, looking in multiple different systems for information or "swivel-chairing", and consuming precious time that can translate to real dollars lost and a bad end-user experience. Instead, let's see how OpenAI's Vector Store and Agents can improve that process
+
+Here you can see a proposed extension to your existing application where a user can bring in incident notes, and enter a prompt specifying what they want the agent to respond to. As you can see here, we've already loaded ten of your company's sample incidents and runbooks to the OpenAI vector store, which the agent will scan through semantically. Then, it'll pass along the found context, if any, as part of its reasoning process.
+
+By generating a triage brief, we're sending a request to the Responses API, which will take the notes and prompt, search for relevant information in our vector store, and summarize the incident as an output.
+
+You can see Citations and Sources behind the returned guidance, where we can see it also used a connection to GitHub to scan for changes that might've been relevant to the issue we're observing as seen in these pull requests.
+
+By viewing a citation, we can see exactly what portion of our documents were meaningfully significant - for example, here it's highlighting part of our runbook most relevant to the issue we're looking at so we can visually verify what context is being used.
+
+Here’s how you could configure an agent for this workflow. In your Brightward project, you can configure an Agent from scratch, or select and modify a Template such as the SRE agent for incident response. Templates come with a pre-defined instruction set, selected Model and other model parameters.
+
+Also, by leveraging MCP, an agent can access your data in external platforms such as Atlassian, GitHub, and AWS. Once configured, an agent can automatically choose to use these tools as needed to formulate a grounded response.
+
+Slide 3 - Value and guardrails (39s)
+
+So for Brightward, the value and goal here is reducing the time your SREs spend searching for information and helping them get to a correct next step faster. Our proposed pilot target is a thirty percent reduction in time to the next step, which we’d need to validate against your current process. We’d measure correctness, citation support, response time, and API cost.
+
+From a guardrails perspective and principle of least privilege, we’d scope data access, keep the knowledge current, apply your retention policies, and have engineers review the guidance. As a longer-term goal of moving toward remediation, your application would also need to enforce approvals, action permissions, rollback, and recovery checks.
+
+Slide 4 - Next steps and recap (29s)
+
+To recap, the OpenAI platform can extend existing tooling with your operational knowledge and OpenAI’s models to help your engineers investigate faster. As next steps, we can partner to run a pilot with your SRE team. That would let us compare against your current process before adding approved remediation and gradually introducing automation. The next decision would be agreeing on the pilot scope and success criteria.
+
+Thank you very much for your time, and I'll share the content from today as a follow-up. Take care.

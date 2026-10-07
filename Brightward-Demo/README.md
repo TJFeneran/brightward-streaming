@@ -2,7 +2,7 @@
 
 A local advisory prototype featuring one OpenAI vector store across three Brightward incidents: frozen streaming playback, an unhealthy EC2 application with disk pressure, and RDS PostgreSQL connection pressure. The same retrieval and source-inspection workflow serves all three. No live telemetry or infrastructure actions.
 
-**October 6 checkpoint:** restored the default Responses API/File Search flow at TJ's request. No saved Platform agent is selected or required. The existing API project, private key, ten-document store, three incidents and citation viewer are retained. Supplemental RDS observations and fictional change approval have been removed; missing evidence stays missing. Validation: 32 offline Python tests, three Markdown checks and a fresh live RDS brief with native citations passed. The six-case evaluation and timed rehearsal remain pending. There is no canned-answer fallback.
+**October 6 checkpoint:** restored the default Responses API/File Search flow at TJ's request. No saved Platform agent is selected or required. The existing API project, private key, ten-document store, three incidents and citation viewer are retained. Supplemental RDS observations and fictional change approval have been removed; missing evidence stays missing. Validation: 32 offline Python tests, three Markdown checks and a fresh live RDS brief with native citations passed. The six-case evaluation remains pending. TJ reported the revision 8 speaking script rehearsed under five minutes; integrated recording checks remain separate. There is no canned-answer fallback.
 
 ## Run locally
 
@@ -24,9 +24,9 @@ python -m northstar.server
 
 The key is saved with owner-only permissions in `.northstar/openai-api-key`, outside every served directory. It takes precedence over an existing `OPENAI_API_KEY` environment variable. Run `credentials` once or when rotating the key; never include `.northstar/` in source packages. Without a saved key, the app accepts `OPENAI_API_KEY`. `.env` files are not loaded.
 
-Configuration lives in `northstar/settings.py`: project `proj_ZVeLEv0xHj4ZO6o5jVpWj1yO`, agent `agent_85dc53094758424c9153de65ab06688e0606e020571b47569d`. Ingestion first verifies access to that agent using the selected project header. Grant the backend only the permissions needed for agent sessions/model inference and knowledge retrieval; ingestion additionally needs file and vector-store creation. No Admin key, AWS credentials or GitHub token is used.
+Configuration lives in `northstar/settings.py` and retains the existing API project. No saved agent is selected or required. Grant the backend the permissions needed for model inference and knowledge retrieval; ingestion additionally needs file and vector-store creation. Ingestion verifies the selected project’s knowledge store. No Admin key, AWS credentials or GitHub token is used.
 
-Open **http://127.0.0.1:8000** for the synthetic operations overview. Metrics and logs update every five seconds. The streaming alert is preloaded; the compute alert arrives after 15 active seconds and RDS connection pressure after 45 active seconds (20:16 UTC). **Pause simulation** freezes the replay, and **Replay** resets it. The eight-times replay clock aligns the October 6 incident snapshots; no live telemetry is connected. The inbox retains all three alerts without duplicate notifications. Hiding the browser tab pauses the replay.
+Open **http://127.0.0.1:8000** for the synthetic operations overview. Metrics and logs update every five seconds. The streaming alert is preloaded; the compute alert arrives after five active seconds and RDS connection pressure five seconds later. **Pause simulation** freezes the replay, and **Replay** resets it. The accelerated replay clock still aligns the October 6 incident snapshots at 20:12 UTC for compute and 20:16 UTC for RDS; no live telemetry is connected. The inbox retains all three alerts without duplicate notifications. Hiding the browser tab pauses the replay.
 
 Click **Investigate** on an alert to open the existing investigation with its incident type, notes and focus question already populated. Generation still requires an explicit click and API setup. Use **Operations Dashboard** to return without losing an in-progress draft. You can also open **http://127.0.0.1:8000/#triage** directly. The dropdown starts at **Select Incident...**. Select **Frozen live stream** to load its context and question, then choose **Generate triage brief**. Select **Unhealthy EC2 application** to load the second fixture and its question, then generate again. **RDS connection pressure** loads the database fixture and question. Open a numbered citation to see exact excerpts returned by vector-store search and, optionally, the full local knowledge document. Initial setup happens before recording, not while walking through the incident.
 
@@ -50,15 +50,28 @@ The store has a seven-day inactivity expiration. That is not a promise that uplo
 
 | Segment | Time | Show or explain |
 | --- | --- | --- |
-| Slide 1: situation | 0:00-0:30 | Brightward/on-call SRE and manual root-cause analysis |
-| Slide 2: Platform and API | 0:30-1:10 | Vector Store, Agent, cited guidance and future remediation path |
-| Complete demo, no slide | 1:10-4:00 | Platform/store and Agents 40 sec, then streaming/compute app 130 sec |
-| Slide 3: value and guardrails | 4:00-4:35 | Unvalidated target, measurement, access/review and action controls |
-| Slide 4: next steps and recap | 4:35-5:00 | Six-case validation, bounded pilot and gradual expansion |
+| Slide 1: situation | 0:00-0:48 | TJ, fictional Brightward Media and manual investigation |
+| Slide 2: Platform and API | 0:48-1:35 | Retrieval, cited guidance, agents and future remediation |
+| Demo UI, no slide | 1:35-3:08 | Monitoring introduction, streaming brief and citation inspection |
+| Platform Agents, no slide | 3:08-3:43 | Illustrative configuration and external-tool options |
+| Slide 3: value and guardrails | 3:43-4:22 | Unvalidated target, measurement, access/review and action controls |
+| Slide 4: recap and next steps | 4:22-4:51 | Proposed pilot, success criteria and closing |
 
-The PDF has exactly four slides. All Platform and app clicks occur between slides 2 and 3, with no slide interruptions. Start the app on the paused Operations overview, click Investigate on the streaming alert, generate a real brief and inspect its citation. Then select compute, generate a brief and inspect its historical source. Keep the 2:40-3:15 streaming citation walkthrough. The 130-second app allocation remains 75 seconds streaming, 35 compute and 20 transitions/generation.
+TJ’s revision 8 speaking script has 815 words. TJ reported a stopwatch rehearsal
+just under five minutes; segment labels total 4:51. All app and Platform clicks
+stay between slides 2 and 3, app first and Platform second. The timed UI demo
+uses streaming; compute and RDS remain available in the app and evaluation.
+Check actual generation waits, source explanation and navigation in the take.
 
-The Platform Agents example illustrates configurable instructions and tools. The local app calls Responses and File Search directly and has no saved-agent or remediation integration. Automated fixes are a future path requiring scoped tools, application-enforced permissions/approval policy, rollback and recovery checks. Rehearse real waits and use clearly labeled captures only for actual validated runs. Draft 7 has 434 spoken words; all timing is provisional. PDF and narration share the parent project's `presentation/content.json`; there is no HTML slide workflow.
+The Platform Agents example illustrates configuration. The local app calls
+Responses and File Search directly and has no saved-agent or remediation
+integration. GitHub PR evidence is simulated, as described below. Automated
+fixes remain a future integration requiring enforced controls.
+
+The current animated deck is in the parent project’s `fslides/decks/brightward/`.
+The script source is `presentation/content.json`; regenerate narration and
+speaker notes with `python3 tools/build-slides-pdf.py --narration-only` from the
+root. Preserve the original four-page PDF until TJ requests a new export.
 
 ## Implementation and verification
 

@@ -1,3 +1,28 @@
+# Script and presentation checkpoint - October 7, 2026
+
+The parent project brief is authoritative. TJ’s revision 8 script replaces the
+older recording flow below: 48 seconds slide 1, 47 slide 2, 93 app walkthrough,
+35 Platform Agents, 39 slide 3 and 29 slide 4. TJ reported a stopwatch rehearsal
+under five minutes; labels sum to 4:51. The full app-then-Platform demo remains
+between slides 2 and 3. Speaking rehearsal is complete; current-output review,
+six-case scoring and signed-in Platform/integrated recording checks are separate.
+
+The app uses Responses and File Search directly, with no saved agent and no
+infrastructure actions. GitHub evidence is supplied by simulated PR fixtures.
+Streaming is preloaded; compute arrives after five active seconds and RDS after
+ten, preserving the fixture timestamps. The ten-document corpus is unchanged.
+The original four-page PDF is retained; the animated deck, speaker notes,
+narration and plain-text speaking script reflect revision 8.
+
+Sync verification: 32 offline Python tests, three Markdown checks and the
+controlled-browser replay test passed. The browser check covers timing, pause/
+replay, all three handoffs, timestamp alignment, failure/retry and responsive
+width, with zero model requests or page errors. The four animated slide sources
+are locked; no slide content or layout edits were made.
+
+Everything below is historical checkpoint evidence; use the current brief for
+runtime and ingestion status.
+
 # Folder migration - October 6, 2026
 
 The workspace is `/home/tj/Documents/Brightward Streaming`; the app directory is `Brightward-Demo`. The virtual environment was rebuilt with the pinned Python 3.12.9 dependencies. Existing `northstar` commands, source IDs and ingestion state are preserved. The old app compatibility link and rollback environment were removed during approved cleanup. See the parent project brief for current status. All 14 tests, fish activation and real localhost startup/routes passed after the move. Reindexing is still required for the prior brand-content revision, not for this folder move.

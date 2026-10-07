@@ -4,16 +4,61 @@ Authoritative local project brief. Updated October 7, 2026, America/New_York. TJ
 
 ## Resume here
 
+### TJ’s timed script and GitHub sync, October 7
+
+The current presenter script is revision 8, authored by TJ in his natural speaking
+tone. TJ reported a stopwatch rehearsal just under five minutes. Its segment
+labels total **4:51 (291 seconds)**: slides 1 and 2 take 48 and 47 seconds, the app
+walkthrough takes 93 seconds (34 + 59), Platform Agents takes 35 seconds, and
+slides 3 and 4 take 39 and 29 seconds. These labels leave nine seconds against the
+five-minute limit; cumulative windows derive from the supplied labels.
+
+The app walkthrough now precedes the Platform walkthrough, entirely between
+slides 2 and 3. The timed app segment uses streaming; compute and RDS remain
+available and covered by the six-case evaluation. The script calls the fictional
+customer “Brightward Media”; the repository/app compatibility names remain
+Brightward Streaming. Preserve TJ’s wording, including his chosen GitHub line.
+The actual implementation still uses simulated PR fixtures and Responses/File
+Search directly; the Platform Agent is illustrative and no live connector or
+remediation capability was added.
+
+`presentation/content.json`, the generated narration, the plain-text
+`Brightward-Speaking-Script.txt` and all four fslides notes now share the approved
+script. The existing user-edited slide copy and faster alert replay are retained.
+The original PDF is preserved from draft 7; no PDF export was requested. The
+standalone animated HTML should mirror the editable deck. TJ has locked the four current slide files and the final script. No further
+content or layout edits are authorized. Speaking rehearsal is reported complete;
+live output/citation review, six-case scoring, signed-in Platform preflight and
+fitting interaction waits into the recorded take remain separate checks.
+
+Sync verification: 32 offline Python tests and three Markdown checks passed.
+The controlled-browser replay test passed five-second alert arrivals, pause/
+resume/replay, all three handoffs, aligned fixture timestamps, failure/retry and
+responsive widths, with zero model requests or page errors. All four locked
+slides were visually inspected at their saved density: 83 / 86 / 86 / 67 visible
+words, no clipping or overlap observed. Slide 3 retains its locked “incident
+resolution” / estimated MTTR wording, while the final script proposes time to a
+correct next step. This mismatch is recorded without editing the slide; no
+measured MTTR improvement or external comparison evidence is supplied here.
+
+### Faster demo alerts, October 7
+
+The operations overview now delivers the remaining alerts five seconds apart:
+streaming is preloaded, compute arrives after five active seconds and RDS after
+ten. The replay clock and metric trends still align with the existing 20:12 UTC
+compute and 20:16 UTC database snapshots. Pause, hidden-tab suspension and Replay
+retain their behavior. This supersedes the earlier 15/45-second arrival schedule.
+
 ### Animated HTML slides, October 7
 
 At TJ's request, `fslides/decks/brightward/` now contains an animated four-slide
 version of the approved flow, inspired by the supplemental diagrams in the linked
 Elastic presentation. It uses Brightward's navy/teal identity, isometric SVG
 assembly, moving retrieval connectors, an explicitly unvalidated pilot-target
-comparison and a proposed rollout graphic. `notes.json` retains draft 7's talk
-track and the full demo between slides 2 and 3. A standalone HTML copy lives
+comparison and a proposed rollout graphic. `notes.json` contains TJ’s revision 8 talk
+track and the full app-then-Platform demo between slides 2 and 3. A standalone HTML copy lives
 beside the manifest. TJ requested no PDF exports during this editing phase.
-The original PDF, content JSON and narration remain intact.
+The original PDF remains intact; the content JSON and narration now reflect TJ’s revised script.
 This is a presentation-format addition, not a change to the app, knowledge corpus
 or validation/recording gates. Start the local deck with the launcher documented
 in `fslides/README.md`; restart an already-running starter server once to load
@@ -23,7 +68,7 @@ the four-slide manifest.
 
 Use exactly four slides: (1) the situation and manual root-cause analysis, (2) The OpenAI Platform & API, including Vector Store and Agent roles in faster or automatic remediation, (3) value and guardrails, and (4) next steps and recap. The entire demo, including the OpenAI Platform Agents website and clicking through the local UI, takes place between slides 2 and 3. There is no separate demo slide and no return to the slides during the demo.
 
-Retain the five-minute recording target. Draft 7 allocates 0:00-0:30 to slide 1, 0:30-1:10 to slide 2, 1:10-4:00 to the uninterrupted demo, 4:00-4:35 to slide 3, and 4:35-5:00 to slide 4. The demo reserves 40 seconds for the Platform/store walkthrough and 130 seconds for the existing streaming/compute UI sequence. These are rehearsal targets, not measured timings. Automatic remediation is a future integration path requiring scoped action tools and controls enforced by the application. The present app continues to use Responses and File Search for recommendations and makes no infrastructure changes.
+Retain the five-minute recording limit. Revision 8 allocates 0:00-0:48 to slide 1, 0:48-1:35 to slide 2, 1:35-3:08 to the app, 3:08-3:43 to Platform Agents, 3:43-4:22 to slide 3 and 4:22-4:51 to slide 4. TJ has timed the speaking script with a stopwatch. Automatic remediation remains a future integration requiring scoped tools and application-enforced controls. The present app uses Responses and File Search for recommendations and makes no infrastructure changes.
 
 ### Current configuration: default triage, no saved agent
 
@@ -33,9 +78,9 @@ The current Brightward API project, private key and ten-document ingestion manif
 
 The extra RDS configuration, session/transaction, memory and impact observations, fictional change-review approval, server injection and answer note were removed. Both copies of the supplemental fixture were deleted. Database triage again uses the original incident, candidate PRs and retrieved runbooks; unknowns stay unknown. The database alert, initial metrics, original PR fixtures and ten knowledge documents remain part of the demo.
 
-Validation: 32 offline Python tests and three Markdown-renderer checks passed. The restarted server at `http://127.0.0.1:8000/` reports `backend=responses` and `agent_id=null`. A fresh live RDS brief completed with native citations to NS-RB-006/007; it listed effective settings, session attribution, transaction age, blockers and deployment state as missing, and kept review/approval conditional. The source viewer opened the returned runbook excerpt. Earlier saved-agent results remain historical. Next: run the six-case evaluation, reconcile corpus counts and time the PDF/narration rehearsal.
+Validation: 32 offline Python tests and three Markdown-renderer checks passed. The restarted server at `http://127.0.0.1:8000/` reports `backend=responses` and `agent_id=null`. A fresh live RDS brief completed with native citations to NS-RB-006/007; it listed effective settings, session attribution, transaction age, blockers and deployment state as missing, and kept review/approval conditional. The source viewer opened the returned runbook excerpt. Earlier saved-agent results remain historical. Next: run the six-case evaluation, review current recording output and check the integrated take against TJ’s completed speaking rehearsal.
 
-**Current script: draft 7, 434 spoken words.** The four-page PDF and narration now follow the approved situation, Platform/API, value/guardrails and next-steps sequence. A separate 1:10-4:00 demo section contains all Platform and app interactions, including the 1:20-1:42 Agents configuration walkthrough and 2:40-3:15 citation inspection. The builder validates a continuous 300-second timeline and inserts the demo only after slide 2. All four PDF pages were visually checked. Speech is approximately 200 seconds at 130 words/minute, leaving approximately 100 seconds for interactions and waits. These are estimates. Recording lock still requires current-output review, six-case evaluation, signed-in Platform preflight and measured rehearsal. Older five-slide descriptions in the historical notes below are superseded.
+**Current script: revision 8, 815 spoken words.** TJ’s segment labels total 291 seconds and his reported speaking rehearsal fits under five minutes. The browser demo runs 1:35-3:43, with app/citation inspection before the Platform configuration example. The builder validates this continuous timeline against the five-minute limit and can update narration and speaker notes with `--narration-only`. The original four-page PDF remains unchanged from draft 7. Current-output review, six-case scoring and signed-in Platform preflight are still separate from the completed speaking rehearsal. Older five-slide and draft-7 timing descriptions are historical.
 
 ### Completed and verified
 
@@ -57,17 +102,26 @@ Validation: 32 offline Python tests and three Markdown-renderer checks passed. T
 
 ### Next work, in order
 
-1. **Use draft 7 and the four-page PDF.** The complete demo belongs between slides 2 and 3. Show the actual ten-document store and Platform Agents configuration, then the streaming/compute UI sequence. The citation walkthrough stays at 2:40-3:15. Automatic remediation is a future integration path, not a capability claimed for the local app.
-2. **Validate the recording cases and Platform views.** Check the current store and review fresh streaming/compute answers, cited excerpts and relevance explanations. Verify the signed-in Agents controls and prepared SRE example. Preserve manifests and remote resources. The presentation edit changes no indexed content and requires no reindex; the current configuration checkpoint supersedes the older reindex warning.
-3. **Run the six-case evaluation.** Six cases and 24 criteria are authored but not scored. Record actual answers, excerpts, model/corpus version, latency and usage/cost or explicitly unavailable status. Resolve unsupported recommendations and require all safety criteria to pass before recording.
-4. **Rehearse and lock.** Time the 30 / 40 / 170 / 35 / 25-second sequence. Measure Platform navigation, both brief generations, source explanation and reading time. If needed, use a clearly labeled capture of a real run. Lock the script only after this pass.
-5. **Record and package.** Check the five-minute recording, align the PDF and reviewer README with validated evidence, and confirm recruiter submission formats and deadline. Those submission details remain unconfirmed.
+1. **Use TJ’s revision 8 script and animated deck.** Keep the app-then-Platform demo between slides 2 and 3. Preserve the original PDF; export a new one only if TJ requests it.
+2. **Validate recording output and Platform views.** Verify the ten-document store, inspect a fresh streaming brief and its cited passage/relevance explanation, and confirm signed-in Agents controls. Compute and RDS remain available for evaluation. Preserve manifests and remote resources; no reindex is required for script or slide edits.
+3. **Run the six-case evaluation.** Six cases and 24 criteria are authored but not scored. Record actual answers, excerpts, model/corpus version, latency and usage/cost or explicitly unavailable status. Require all safety criteria to pass.
+4. **Check the integrated take.** TJ has completed the speaking rehearsal under five minutes. Fit the actual API wait, citation reading and navigation into the 48 / 47 / 128 / 39 / 29-second schedule. Label any previously captured real validated run.
+5. **Record and package.** Check the final five-minute recording, align reviewer materials with validated evidence and confirm submission formats/deadline. PDF regeneration remains deferred unless requested.
 
 ### Source of truth and scope
 
-Narration and slides share `presentation/content.json`. Make the next script changes there, then use `tools/build-slides-pdf.py` to regenerate `Brightward-Slide-Copy-and-Narration.md` and `Brightward-Slides.pdf` together. Do not edit only the generated narration file. Retain the approved Aurora/Modern clarity design. The approved phrase “Manually search runbooks” now appears on slide 1, and “Review a grounded, cited investigation plan” remains on slide 2.
+The script source is `presentation/content.json`. Run
+`python tools/build-slides-pdf.py --narration-only` to regenerate the annotated
+narration, plain-text speaking script and fslides speaker notes while preserving
+`Brightward-Slides.pdf`. Do not edit generated narration alone. The PDF mode
+remains available for an explicitly requested export and uses ReportLab/local
+fonts. Retain the approved Aurora/Modern clarity design.
 
-**The original PDF workflow remains available.** Its deck is built directly with ReportLab and local fonts. TJ's later request authorizes the new animated fslides deck described above; its local export is separate from `Brightward-Slides.pdf`. Keep the four-slide flow and current/future capability distinction in both formats. Do not add app features, extra slides or production actions during presentation work.
+The current animated deck is `fslides/decks/brightward/`; refresh its standalone
+HTML with the pinned launcher after slide or note changes. All four slides and
+the entire browser demo retain their approved order. Publishing or a comment
+gateway is not enabled by deck editing or by pushing this repository. No app
+features, extra slides or production actions belong in script synchronization.
 
 ### Runtime handoff
 
@@ -81,7 +135,7 @@ python -m northstar.ingest --new-project --new-store
 python -m northstar.server
 ```
 
-Open `http://127.0.0.1:8000/`. The upgrade archives the old manifest and resumes/reuses a matching new revision; it does not delete old remote resources. Do not bypass corpus hash checks. At the last agent-side check, no API key was available and no live API run was made for the renamed corpus. A new chat should check current readiness without exposing credentials. The server does not automatically load `.env`.
+Open `http://127.0.0.1:8000/`. The upgrade archives the old manifest and resumes/reuses a matching new revision; it does not delete old remote resources. Do not bypass corpus hash checks. The current configuration checkpoint above records the later verified default backend and live RDS run; earlier no-key/reindex notes are historical. A new chat should check current readiness without exposing credentials. The server does not automatically load `.env`.
 
 This is the authoritative local handoff. TJ approved a local-only working workflow and removal of the separate Northstar Streaming cloud project and Library copies. The Northstar Streaming cloud project and its chats/tasks were permanently deleted after explicit confirmation that the local files remain intact. The 17 selected Northstar Library file entries were removed from the active list. Six loose files are confirmed in Trash with 30-day recovery. The original Northstar-Streaming-Incident-Triage cloud folder and its subfolders were also permanently deleted after separate confirmation; absence was verified in the active Library. Trash has not been emptied. The API vector store and active/archived ingestion manifests are separate and must be preserved. Historical local originals, migration records and rollback backups were removed in the approved cleanup.
 
@@ -89,11 +143,11 @@ This is the authoritative local handoff. TJ approved a local-only working workfl
 
 Produce a five-minute recorded demo with four slides under TJ's October 7 flow, showing specific customer context, current pain, improved workflow, product use, expected value, practical assumptions, data constraints, governance and next steps. Use only synthetic, anonymized or public data. AI assistance is permitted; TJ must be able to explain the choices. The original assignment suggested approximately five hours of effort and five business days from recruiter receipt. Receipt date, exact deadline and required submission formats remain unconfirmed; do not infer the deadline from this brief’s date.
 
-Finish means: actual retrieval for both recording cases is reviewed, six evaluation cases are scored with evidence, the five-minute recording is rehearsed and checked, and the final package matches the recruiter instructions. Building files is not the same as finishing validation or recording.
+Finish means: actual retrieval for the scripted streaming case is reviewed, six evaluation cases are scored with evidence, the five-minute recording is rehearsed and checked, and the final package matches the recruiter instructions. Building files is not the same as finishing validation or recording.
 
 ## Customer, workflow and value
 
-Fictional customer: Brightward Streaming, a live sports service funded by advertising and subscriptions. Business unit/persona: Reliability Operations, on-call site reliability engineer. Pain: manually searching operational runbooks and prior incidents, reconciling applicability/authority, and finding the owner during disruption. Service disruption risks viewer experience, advertising delivery and subscriber trust; no exact financial loss is claimed.
+Fictional customer in TJ’s current script: Brightward Media, a video streaming platform with self-built monitoring tooling. The app and repository retain Brightward Streaming as their existing name. Business unit/persona: Reliability Operations, on-call site reliability engineer. Pain: manually searching operational runbooks and prior incidents, reconciling applicability/authority, and finding the owner during disruption. Service disruption risks viewer experience, advertising delivery and subscriber trust; no exact financial loss is claimed.
 
 Improved workflow: engineer supplies a sanitized incident snapshot and question → File Search retrieves passages from the OpenAI vector store → the Responses API/model drafts a short cited brief → engineer inspects returned evidence and selects the next check. The model has no live monitoring or infrastructure action tools. Use the store as the shared knowledge layer, not as an autonomous diagnostic or remediation engine.
 
@@ -152,28 +206,41 @@ Approved future mention: scoped action tools through API, CLI or MCP could suppo
 
 | Segment | Story | Window |
 | --- | --- | --- |
-| Slide 1 | Situation: Brightward and manual root-cause analysis | 0:00-0:30 |
-| Slide 2 | The OpenAI Platform & API: Vector Store, Agent and remediation path | 0:30-1:10 |
-| Demo, no slide | Platform/store and Agents, then streaming/compute app walkthrough | 1:10-4:00 |
-| Slide 3 | Value, unvalidated target, measurement and guardrails | 4:00-4:35 |
-| Slide 4 | Validation, bounded pilot, next steps and recap | 4:35-5:00 |
+| Slide 1 | TJ introduction, fictional customer and manual investigation | 0:00-0:48 |
+| Slide 2 | Platform/API, retrieval, agents and future remediation | 0:48-1:35 |
+| Demo 1, no slide | Monitoring introduction, streaming brief and citation inspection | 1:35-3:08 |
+| Demo 2, no slide | Illustrative Platform Agents configuration and external tools | 3:08-3:43 |
+| Slide 3 | Unvalidated target, measurement and guardrails | 3:43-4:22 |
+| Slide 4 | Recap, proposed pilot and closing | 4:22-4:51 |
 
-No extra cover, demo slide or appendix. All browser interaction takes place between slides 2 and 3. The 170-second demo includes 40 seconds on the Platform/store and 130 seconds in the app: 75 streaming, 35 compute, 20 transitions/generation. Show actual completed remote-store evidence and a prepared Agents configuration. The current local app invokes Responses and File Search directly. A Platform example illustrates agent customization and is not the app backend.
+There is no extra cover, demo slide or appendix. All browser interaction stays
+between slides 2 and 3, app first and Platform second. The 128-second demo has a
+93-second app allocation and a 35-second Platform allocation. The local app
+invokes Responses and File Search directly; the Platform Agent is illustrative.
 
-Draft 7 has 434 spoken words, approximately 200 seconds at 130 words/minute, leaving approximately 100 seconds for interactions and pauses. The builder checks that all segment and beat windows join into a 300-second timeline. These are planned timings, not a measured rehearsal. Exact copy, transitions and source targets are in `Brightward-Slide-Copy-and-Narration.md`.
+Revision 8 has 815 spoken words. TJ reported a stopwatch rehearsal just under
+five minutes; supplied segment labels sum to 4:51. The builder checks that all
+segment and beat windows join into the 291-second schedule under a 300-second
+limit. `Brightward-Speaking-Script.txt` provides the speaking paragraphs alone;
+`Brightward-Slide-Copy-and-Narration.md` also includes actions and preparation.
 
-Start the app sequence from the paused synthetic Operations overview. Click Investigate on the streaming alert, then Generate triage brief. Keep the citation/explanation/full-source inspection at 2:40-3:15. Select compute through Demo incident and inspect its returned historical source. Return directly to slide 3 at 4:00. Both actual outputs and waits still need rehearsal. Label any previous capture of a validated run, and never present mocked output as live retrieval.
+Start with the synthetic Operations Dashboard and click Investigate on the
+streaming alert. Generate a real brief, inspect returned guidance and its
+citation, then switch directly to the signed-in Platform Agents example. Return
+to slide 3 after that example. Generation/citation quality, live navigation and
+API waits remain to check in the integrated recording. Keep the synthetic label
+visible and label any previous capture of a real validated run.
 
 ## Core-requirement coverage
 
 | Requirement | Where it appears |
 | --- | --- |
-| Industry, business unit/persona, workflow and problem | Slide 1 and narration: Brightward live sports, Reliability Operations and on-call SRE |
+| Industry, business unit/persona, workflow and problem | Slide 1 and narration: Brightward Media video streaming, Reliability Operations and on-call SRE |
 | Current pain and improved workflow | Slides 1-2 and demo: manual investigation, retrieved guidance and engineer review |
 | Selected product surfaces in use | Slide 2 and the demo between slides 2 and 3: vector store, File Search, Responses and separate Platform Agents configuration |
 | Expected impact | Slides 1 and 3: disruption stakes, unvalidated target and measurement |
 | Assumptions, data and governance | Demo and slide 3: synthetic/manual inputs, current documents, access, review and requirements before automated actions |
-| Next steps and recap | Slide 4: six-case validation, bounded pilot, measured expansion and proposed pilot decision |
+| Next steps and recap | Slide 4: recap, proposed SRE pilot and pilot decision; evaluation remains part of preparation |
 
 ## Approved design
 
@@ -189,24 +256,24 @@ Six model-evaluation cases, each with four criteria (24 total), are written but 
 
 ## Board tasks and remaining work
 
-1. Four-slide deck: PDF built and visually checked, with the complete demo between slides 2 and 3.
-2. Spoken script: draft 7, 434 spoken words, separate action cues and explicit browser/slide transitions. Final lock requires validated outputs and measured timing.
-3. Product explanation: Vector Store and Agent roles, current Responses/File Search implementation and future remediation path are distinct on slide 2 and in narration.
-4. Design standards: approved Aurora/Modern clarity retained; final recording readability remains to check.
-5. Recording incidents: streaming and compute. The app also supports RDS.
-6. Synthetic knowledge/input: ten allowlisted documents and three fixtures, with six evaluation cases.
-7. Retrieval/backend: default Responses/File Search restored. See the current configuration checkpoint for the latest recorded live RDS and offline validation; recording-case review is still required.
-8. Monitoring and triage UI: synthetic signals, Investigate handoff and citation/source inspection remain the demo path.
+1. Four-slide deck: current animated slides locked by TJ and visually inspected. Original four-page PDF preserved; no new PDF export.
+2. Spoken script: TJ-authored revision 8, 815 words, stopwatch rehearsal reported under five minutes. Segment labels sum to 4:51; narration and all four notes match.
+3. Product explanation: current Responses/File Search guidance, illustrative Platform Agents and future remediation remain separate in implementation documentation.
+4. Design standards: approved Aurora/Modern clarity retained. No further content or layout edits to the locked slides.
+5. Timed recording incident: streaming, followed by the Platform configuration example. Compute and RDS remain available in the app and evaluation.
+6. Synthetic knowledge/input: ten allowlisted documents and three fixtures, with six evaluation cases. No corpus changes or reindex.
+7. Retrieval/backend: default Responses/File Search retained. Current configuration checkpoint records prior live RDS validation; recording-case review remains separate.
+8. Monitoring and triage UI: five-second alert arrivals retained. The controlled-browser replay test passes timing, pause/replay, three handoffs, fixture alignment and responsive checks.
 9. Six-case evaluation: 24 criteria authored; formal model runs and scoring pending.
-10. Reviewer README: four-slide recording budget updated; measured results pending.
-11. Rehearsal/recording: verify the signed-in Platform walkthrough and all 30 / 40 / 170 / 35 / 25-second windows, then lock.
+10. Reviewer README: current setup, animated-deck/script sequence and limits synchronized; measured model-evaluation results pending.
+11. Rehearsal/recording: speaking rehearsal complete; signed-in Platform preflight, API waits, citation review and integrated recording remain to check. Preserve the locked slide 3 wording mismatch as a validation finding.
 12. Submission package: regenerate source ZIPs after validation; final recording/results and recruiter formats/deadline pending.
 
 ## Files and continuity
 
-Active: this brief, `Brightward-Project-Board.html`, PDF, narration, `presentation/`, direct PDF builder, `Stage-2/`, and `Brightward-Demo/`. The root README is a short launch guide; the brief remains the single detailed project record. Portable ZIPs will be regenerated at submission time. Exclude credentials, `.northstar` manifests, virtual environments and test caches from shared packages.
+Active: this brief, `Brightward-Project-Board.html`, the original PDF, annotated narration, `Brightward-Speaking-Script.txt`, `presentation/`, the PDF/narration builder, `fslides/`, `Stage-2/`, and `Brightward-Demo/`. The root README is a short launch guide; the brief remains the single detailed project record. Portable ZIPs will be regenerated at submission time. Exclude credentials, `.northstar` manifests, virtual environments and test caches from shared packages.
 
-Approved cleanup removed `archive/`, `sync/`, `tmp/`, pytest caches, the old virtual environment, both root ZIPs, the Northstar brief pointer, the app compatibility symlink and empty `OBSoutput/`. This workspace has no Git history or retained local rollback archive. Active app code, corpus copies, presentation sources, deck, script, active environment and `.northstar/` manifests were preserved. Do not recreate cloud copies or synchronization records. The cleanup was limited to this project folder and the named cloud copies. Post-cleanup checks confirmed 45 protected active files byte-identical, all 11 backend tests and 3 Markdown-renderer tests passing, and about 56 MB removed.
+Approved cleanup removed `archive/`, `sync/`, `tmp/`, pytest caches, the old virtual environment, both root ZIPs, the Northstar brief pointer, the app compatibility symlink and empty `OBSoutput/`. At that historical cleanup checkpoint the workspace had no Git history or retained local rollback archive. It now has a Git repository and the configured `TJFeneran/brightward-streaming` GitHub remote. Active app code, corpus copies, presentation sources, deck, script, active environment and `.northstar/` manifests were preserved. Do not recreate cloud copies or synchronization records. The cleanup was limited to this project folder and the named cloud copies. Post-cleanup checks confirmed 45 protected active files byte-identical, all 11 backend tests and 3 Markdown-renderer tests passing, and about 56 MB removed.
 
 After each material decision, update this brief first and the board second. Preserve approved scope and unfinished work across chats. Do not turn exploratory ideas into approved changes or mark successful HTTP transport as validated model behavior.
 

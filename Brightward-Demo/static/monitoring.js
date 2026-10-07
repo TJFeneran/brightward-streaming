@@ -2,7 +2,8 @@
 // A local, scripted replay. No telemetry is fetched and no model call is made here.
 (() => {
   const START = Date.parse('2026-10-06T20:10:00Z');
-  const SPEED = 8, ALERT_AFTER = 15, DATABASE_AFTER = 45, REFRESH = 5, POINTS = 31;
+  const SPEED = 8, ALERT_AFTER = 5, DATABASE_AFTER = ALERT_AFTER * 2, REFRESH = 5, POINTS = 31;
+  const COMPUTE_REPLAY = 15, DATABASE_REPLAY = 45;
   const metrics = [
     {id:'traffic', title:'CDN requests', service:'Live video delivery', unit:' / min', min:10000, max:15000, low:'10k', high:'15k', color:'teal'},
     {id:'segments', title:'Segment 404 rate', service:'Live video delivery', unit:'%', min:0, max:5, low:'0%', high:'5%', color:'rose'},
@@ -30,15 +31,20 @@
     return node;
   }
   function clock(seconds) { return new Date(START + seconds * SPEED * 1000).toISOString().slice(11, 19); }
+  // Fit the existing incident timeline into five-second alert arrivals.
+  function replaySeconds(seconds) {
+    return seconds <= ALERT_AFTER ? seconds * COMPUTE_REPLAY / ALERT_AFTER
+      : COMPUTE_REPLAY + (seconds - ALERT_AFTER) * (DATABASE_REPLAY - COMPUTE_REPLAY) / (DATABASE_AFTER - ALERT_AFTER);
+  }
   function value(id, seconds) {
     const wave = Math.sin(seconds / 17) * .6 + Math.sin(seconds / 7) * .4;
     if (id === 'traffic') return 12800 + wave * 700;
     if (id === 'segments') return seconds < -210 ? .18 : 2.8 + wave * .35;
-    if (id === 'latency') return seconds < ALERT_AFTER ? 230 + wave * 40 : 1140 + wave * 110;
+    if (id === 'latency') return seconds < COMPUTE_REPLAY ? 230 + wave * 40 : 1140 + wave * 110;
     if (id === 'connections') return seconds < 30 ? 180 + wave * 8 : Math.round(180 + Math.min(1, (seconds - 30) / 15) * 312);
     if (id === 'poolwait') return seconds < 30 ? 40 + wave * 5 : Math.round(40 + Math.min(1, (seconds - 30) / 15) * 2560);
     // The existing compute fixture observes 72% -> 96% over 20 replay minutes.
-    const minutesBeforeAlert = (ALERT_AFTER - seconds) * SPEED / 60;
+    const minutesBeforeAlert = (COMPUTE_REPLAY - seconds) * SPEED / 60;
     return Math.min(96, Math.max(72, 96 - minutesBeforeAlert * 1.2));
   }
   function formatted(metric, number) {
@@ -60,22 +66,23 @@
     $('metric-grid').append(card); cards.set(metric.id, {number, badge, svg, area, line, times});
   }
   function renderMetrics() {
+    const replayElapsed = replaySeconds(elapsed);
     for (const metric of metrics) {
-      const card = cards.get(metric.id), current = value(metric.id, elapsed);
+      const card = cards.get(metric.id), current = value(metric.id, replayElapsed);
       card.number.textContent = formatted(metric, current);
       const degraded = metric.id === 'segments' || (metric.id === 'latency' && elapsed >= ALERT_AFTER) || (['connections', 'poolwait'].includes(metric.id) && elapsed >= DATABASE_AFTER);
       const warning = metric.id === 'disk' && current >= 90;
       card.badge.textContent = degraded ? 'Elevated' : warning ? 'High usage' : 'In range';
       card.badge.className = `metric-condition ${degraded ? 'condition-error' : warning ? 'condition-warning' : ''}`;
       const points = Array.from({length:POINTS}, (_, i) => {
-        const v = value(metric.id, elapsed - (POINTS - 1 - i) * REFRESH);
+        const v = value(metric.id, replayElapsed - (POINTS - 1 - i) * REFRESH);
         return `${(i * 300 / (POINTS - 1)).toFixed(1)},${(82 - (v - metric.min) / (metric.max - metric.min) * 74).toFixed(1)}`;
       });
       const path = `M${points.join(' L')}`;
       card.line.setAttribute('d', path); card.area.setAttribute('d', `${path} L300,92 L0,92 Z`);
       card.svg.setAttribute('aria-label', `${metric.title}: ${formatted(metric, current)}${metric.unit}. Synthetic trend over 20 replay minutes.`);
-      card.times.firstChild.textContent = clock(elapsed - 150).slice(0, 5);
-      card.times.lastChild.textContent = `${clock(elapsed).slice(0, 5)} UTC`;
+      card.times.firstChild.textContent = clock(replayElapsed - 150).slice(0, 5);
+      card.times.lastChild.textContent = `${clock(replayElapsed).slice(0, 5)} UTC`;
     }
   }
   function addAlert(scenario, announce = false) {
@@ -103,25 +110,27 @@
     }));
   }
   function nextLog() {
+    const replayElapsed = replaySeconds(elapsed);
     const index = Math.floor(elapsed / REFRESH) % 7;
     const entries = [
       ['INFO', 'cloudfront', 'GET /live/main/index.m3u8 → 200 · playlist response'],
       ['WARN', 'cloudfront', 'GET /live/main/segment.ts → 404 · sampled segment unavailable'],
       ['INFO', 'packager', 'Health probe passed · playlist freshness not yet checked'],
-      [elapsed >= DATABASE_AFTER ? 'ERROR' : 'INFO', 'catalog-api', elapsed >= DATABASE_AFTER ? 'Connection pool acquisition timeout · p95 2600 ms' : `Pool acquisition p95 ${Math.round(value('poolwait', elapsed))} ms`],
-      [elapsed >= DATABASE_AFTER ? 'ERROR' : 'INFO', 'rds-postgres', elapsed >= DATABASE_AFTER ? 'FATAL: remaining connection slots are reserved · bw-catalog-db' : `DatabaseConnections ${Math.round(value('connections', elapsed))} · writer available`],
+      [elapsed >= DATABASE_AFTER ? 'ERROR' : 'INFO', 'catalog-api', elapsed >= DATABASE_AFTER ? 'Connection pool acquisition timeout · p95 2600 ms' : `Pool acquisition p95 ${Math.round(value('poolwait', replayElapsed))} ms`],
+      [elapsed >= DATABASE_AFTER ? 'ERROR' : 'INFO', 'rds-postgres', elapsed >= DATABASE_AFTER ? 'FATAL: remaining connection slots are reserved · bw-catalog-db' : `DatabaseConnections ${Math.round(value('connections', replayElapsed))} · writer available`],
       [elapsed >= ALERT_AFTER ? 'ERROR' : 'INFO', 'session-api', elapsed >= ALERT_AFTER ? 'GET /health → 503 · application health check failed' : 'GET /health → 200 · application health check passed'],
-      [value('disk', elapsed) >= 90 ? 'WARN' : 'INFO', 'ec2-host', `Root filesystem ${Math.round(value('disk', elapsed))}% used · system and instance checks passing`],
+      [value('disk', replayElapsed) >= 90 ? 'WARN' : 'INFO', 'ec2-host', `Root filesystem ${Math.round(value('disk', replayElapsed))}% used · system and instance checks passing`],
     ];
-    addLog(elapsed, ...entries[index]); renderLogs();
+    addLog(replayElapsed, ...entries[index]); renderLogs();
   }
   function renderState() {
     const suspended = paused || document.hidden;
     $('simulation-state').textContent = suspended ? 'Simulation paused' : 'Simulation running';
     $('pause-simulation').textContent = paused ? 'Resume simulation' : 'Pause simulation';
     $('pause-simulation').setAttribute('aria-pressed', String(paused));
-    $('replay-time').textContent = `${clock(elapsed)} UTC`;
-    $('replay-time').dateTime = new Date(START + elapsed * SPEED * 1000).toISOString();
+    const replayElapsed = replaySeconds(elapsed);
+    $('replay-time').textContent = `${clock(replayElapsed)} UTC`;
+    $('replay-time').dateTime = new Date(START + replayElapsed * SPEED * 1000).toISOString();
     const remaining = (elapsed < ALERT_AFTER ? ALERT_AFTER : DATABASE_AFTER) - elapsed;
     $('alert-schedule').textContent = remaining > 0 ? `Next alert in ${Math.floor(remaining / 60)}m ${String(remaining % 60).padStart(2, '0')}s${suspended ? ' · paused' : ''}` : 'All three demo alerts received';
   }
@@ -144,20 +153,22 @@
   document.addEventListener('visibilitychange', renderState);
   setInterval(() => {
     if (paused || document.hidden) return;
+    const previousReplay = replaySeconds(elapsed);
     elapsed++;
+    const replayElapsed = replaySeconds(elapsed);
     if (elapsed === ALERT_AFTER) {
       addAlert('compute', true);
-      addLog(elapsed, 'ERROR', 'session-api', 'Application health failing · root filesystem 96% · incident opened');
+      addLog(replayElapsed, 'ERROR', 'session-api', 'Application health failing · root filesystem 96% · incident opened');
       renderLogs();
     }
-    if (elapsed === 30) {
-      addLog(elapsed, 'INFO', 'catalog-api', 'Replicas increased 12 → 24 · effective pool configuration unverified');
+    if (previousReplay < 30 && replayElapsed >= 30) {
+      addLog(replayElapsed, 'INFO', 'catalog-api', 'Replicas increased 12 → 24 · effective pool configuration unverified');
       renderLogs();
     }
     if (elapsed === DATABASE_AFTER) {
       addAlert('database', true);
-      addLog(elapsed, 'ERROR', 'catalog-api', 'Connection pool acquisition timeout · p95 2600 ms · incident opened');
-      addLog(elapsed, 'ERROR', 'rds-postgres', 'FATAL: remaining connection slots are reserved · DatabaseConnections 492 · CPU 34%');
+      addLog(replayElapsed, 'ERROR', 'catalog-api', 'Connection pool acquisition timeout · p95 2600 ms · incident opened');
+      addLog(replayElapsed, 'ERROR', 'rds-postgres', 'FATAL: remaining connection slots are reserved · DatabaseConnections 492 · CPU 34%');
       renderLogs();
     }
     if (elapsed % REFRESH === 0) { renderMetrics(); nextLog(); }

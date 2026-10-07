@@ -1,17 +1,17 @@
 {
-  "revision": "2026-10-07-four-slide-draft-7",
+  "revision": "2026-10-07-tj-stopwatch-script-8",
   "date": "October 7, 2026",
-  "script_revision": 7,
-  "script_status": "Four-slide rehearsal draft. Recording lock awaits current-output validation, the six-case evaluation, a verified Platform walkthrough and measured timing.",
-  "overview": "Brightward's manual root-cause investigation establishes the need. Slide 2 explains the OpenAI Platform and API, including vector stores, agents and the path toward controlled remediation. The entire Platform and app demo sits between slides 2 and 3. Value and guardrails follow, then next steps and recap. The local app uses Responses API with File Search and provides recommendations; automatic remediation is a future integration path.",
+  "script_revision": 8,
+  "script_status": "TJ-authored script. TJ reported a stopwatch rehearsal just under five minutes; supplied segment labels total 4:51. Current-output review, the six-case evaluation and signed-in Platform preflight remain separate recording checks.",
+  "overview": "TJ introduces the fictional Brightward Media customer and its self-built monitoring platform. Slide 2 covers Vector Store, File Search, Responses and configurable agents. The uninterrupted browser demo follows the app first, then the Platform Agents UI, between slides 2 and 3. Value and guardrails follow, then the pilot recap and closing. The implemented app continues to provide cited recommendations through Responses and File Search, with simulated GitHub PR evidence and no infrastructure actions.",
   "slides": [
     {
       "number": 1,
-      "window": "0:00-0:30",
-      "seconds": 30,
+      "window": "0:00-0:48",
+      "seconds": 48,
       "kicker": "BRIGHTWARD STREAMING / THE SITUATION",
       "title": "Manual root-cause analysis",
-      "subtitle": "Live sports funded by subscriptions and advertising",
+      "subtitle": "Video streaming platform adopting Agentic solutions to improve manual remediation.",
       "lines": [
         "An on-call SRE must connect scattered evidence during an outage",
         "Collect signals",
@@ -27,21 +27,16 @@
       ],
       "rehearsal": [
         {
-          "window": "0:00-0:15",
-          "spoken": "Brightward Streaming is a fictional live sports service funded by subscriptions and advertising. When a stream freezes, the on-call engineer starts a manual root-cause investigation.",
-          "action": "Show slide 1. Establish Brightward and the on-call SRE. Point to the three investigation steps without reading the slide as extra narration."
-        },
-        {
-          "window": "0:15-0:30",
-          "spoken": "They gather signals, search runbooks and past incidents, reconcile guidance, and find the owner. That takes time while viewers wait. The opportunity is to reach a supported next step faster.",
-          "action": "Move across Collect signals, Search for guidance, and Choose the next check. Hold briefly on the customer impact, then advance to slide 2 at 0:30."
+          "window": "0:00-0:48",
+          "spoken": "Hi everyone, thank you for joining. For those I haven't met, I'm TJ Feneran, AI Architect based here in New York City. Today we'll be continuing our discussion on how you, the fictitious company \"Brightward Media\", can leverage OpenAI's Platform to help ensure your streaming video platform is running smoothly, and that incidents can be addressed and remediated as quickly as possible. \n\nAs we learned in our last discussion, Brightward and its Site Reliability Engineering team are currently running a self-built platform, preferring build-over-buy tooling to monitor the health of your infrastructure and applications. In this session, we'll show how your existing tooling can be extended to take advantage of your existing proprietary data and combine it with OpenAI's platform and AI models to enable faster triage and reduced time to remediation.",
+          "action": "Show slide 1 and introduce TJ, the fictional Brightward Media customer and its self-built monitoring tooling. Advance to slide 2 at 0:48."
         }
       ]
     },
     {
       "number": 2,
-      "window": "0:30-1:10",
-      "seconds": 40,
+      "window": "0:48-1:35",
+      "seconds": 47,
       "kicker": "KNOWLEDGE / AGENT / REMEDIATION",
       "title": "The OpenAI Platform & API",
       "subtitle": "A foundation for faster investigation and controlled remediation",
@@ -58,21 +53,16 @@
       ],
       "rehearsal": [
         {
-          "window": "0:30-0:49",
-          "spoken": "The OpenAI Platform and API provide the building blocks. A vector store holds operational knowledge, and File Search retrieves relevant passages. An agent combines a model, instructions, and selected tools to guide an investigation.",
-          "action": "Stay on slide 2. Point first to Vector Store, then Agent. Describe the roles at a high level. Keep all browser clicks for the separate demo after this slide."
-        },
-        {
-          "window": "0:49-1:10",
-          "spoken": "Our app uses Responses and File Search to produce cited guidance for engineer review. Adding scoped action tools could support approved fixes, then automatic remediation for tested, low-risk cases. Let's see the Platform and the workflow.",
-          "action": "Point to the current-demo statement, then the future-remediation line. At 1:10 leave the PDF for the prepared browser tabs. Do not advance to slide 3 yet. The current app does not invoke the saved Platform agent or execute fixes."
+          "window": "0:48-1:35",
+          "spoken": "The OpenAI Platform and API provide the building blocks. A built-in vector store holds operational knowledge that can be searched semantically, and File Search retrieves relevant passages from your company's runbooks and historical cases. The proposed architecture is a retrieval-augmented-generation workflow which uses the Responses API and File Search to produce cited guidance for engineer review. An Agent can combine a model, customer-defined instructions, and optional third-party tools to help guide an investigation by combining your data with the powerful reasoning of OpenAI's models. \n\nA further milestone would be to implement a human-in-the-loop approval action that can trigger a remediation process, and ultimately auto-remediation for low-risk cases. So with that, let’s see the Platform and the workflow.",
+          "action": "Show slide 2. Explain retrieval and configurable-agent building blocks, then the future approval/remediation path. Leave the slides for the app at 1:35; do not advance to slide 3."
         }
       ]
     },
     {
       "number": 3,
-      "window": "4:00-4:35",
-      "seconds": 35,
+      "window": "3:43-4:22",
+      "seconds": 39,
       "kicker": "VALUE / GUARDRAILS",
       "title": "Value and guardrails",
       "subtitle": "Less search time, with evidence and control over actions",
@@ -94,21 +84,16 @@
       ],
       "rehearsal": [
         {
-          "window": "4:00-4:17",
-          "spoken": "The target is thirty percent less time to a correct next step. It's unvalidated. We'll compare assisted and manual triage, checking correctness and citation support alongside speed, unsafe recommendations, latency, and cost.",
-          "action": "Return directly from the app to slide 3 at 4:00. Point to Unvalidated pilot target, then the measurement rows. Do not revisit slide 2 or open another demo tab."
-        },
-        {
-          "window": "4:17-4:35",
-          "spoken": "Less searching could shorten disruption. Production use needs scoped access, current documents, retention rules, and human review. Automatic actions would also need enforced permissions, rollback, and recovery checks. Those controls extend beyond an agent's instructions.",
-          "action": "Point to Guardrails and Before automatic actions. The benefit remains prospective and the controls are pilot requirements. Advance to slide 4 at 4:35."
+          "window": "3:43-4:22",
+          "spoken": "So for Brightward, the value and goal here is reducing the time your SREs spend searching for information and helping them get to a correct next step faster. Our proposed pilot target is a thirty percent reduction in time to the next step, which we’d need to validate against your current process. We’d measure correctness, citation support, response time, and API cost. \n\nFrom a guardrails perspective and principle of least privilege, we’d scope data access, keep the knowledge current, apply your retention policies, and have engineers review the guidance. As a longer-term goal of moving toward remediation, your application would also need to enforce approvals, action permissions, rollback, and recovery checks.",
+          "action": "Return from the Platform directly to slide 3 at 3:43. Point to the unvalidated pilot target and guardrails. Advance to slide 4 at 4:22."
         }
       ]
     },
     {
       "number": 4,
-      "window": "4:35-5:00",
-      "seconds": 25,
+      "window": "4:22-4:51",
+      "seconds": 29,
       "kicker": "NEXT STEPS / RECAP",
       "title": "Next steps and recap",
       "subtitle": "Knowledge supports triage. Controlled tools can support remediation.",
@@ -123,92 +108,47 @@
       ],
       "rehearsal": [
         {
-          "window": "4:35-4:51",
-          "spoken": "Next, validate the six evaluation cases and measure the real waits. Then pilot with one SRE team on these two incident types. Add approved remediation only after the evidence supports it, and expand automation gradually.",
-          "action": "Show slide 4. Move across Validate, Pilot, and Expand. Treat these as next steps, not completed evaluation or pilot results."
-        },
-        {
-          "window": "4:51-5:00",
-          "spoken": "The recap: shared knowledge, cited investigation, controlled action. The next decision is the pilot scope and success criteria.",
-          "action": "Point to the proposed next step. Finish the final line, then hold the closing slide to 5:00. No further app or Platform demo follows."
+          "window": "4:22-4:51",
+          "spoken": "To recap, the OpenAI platform can extend existing tooling with your operational knowledge and OpenAI’s models to help your engineers investigate faster. As next steps, we can partner to run a pilot with your SRE team. That would let us compare against your current process before adding approved remediation and gradually introducing automation. The next decision would be agreeing on the pilot scope and success criteria.\n\nThank you very much for your time, and I'll share the content from today as a follow-up. Take care.",
+          "action": "Show slide 4, recap the proposed pilot and deliver the closing. The supplied segment labels end at 4:51, leaving nine seconds against the five-minute limit."
         }
       ]
     }
   ],
   "demo": {
     "after_slide": 2,
-    "window": "1:10-4:00",
-    "seconds": 170,
-    "title": "OpenAI Platform and application walkthrough",
-    "budget": "40 seconds for the Platform and store, then 130 seconds for the app: 75 streaming, 35 compute, and 20 for transitions/generation.",
+    "window": "1:35-3:43",
+    "seconds": 128,
+    "title": "Application walkthrough, then OpenAI Platform Agents",
+    "budget": "93 seconds for the demo UI (34-second monitoring introduction plus 59-second triage/citation walkthrough), then 35 seconds for Platform Agents. All browser interaction remains between slides 2 and 3.",
     "rehearsal": [
       {
-        "window": "1:10-1:20",
-        "spoken": "Here are the ten indexed operational documents behind the demo.",
-        "action": "Leave slide 2 and show the prepared evidence view of the actual remote vector store. Make its ten allowlisted files and completed indexing statuses readable. Match them to the current manifest before recording. Keep a capture label visible if this is a previously captured view."
+        "window": "1:35-2:09",
+        "spoken": "Your current monitoring system is aggregating metrics, logs, and traces across your cloud environment and is able to surface alerts based on static thresholds and ML-based anomaly detection. When an SRE receives an alert, current processes involve sifting through runbooks manually, piecing together information from disparate data sources, looking in multiple different systems for information or \"swivel-chairing\", and consuming precious time that can translate to real dollars lost and a bad end-user experience. Instead, let's see how OpenAI's Vector Store and Agents can improve that process",
+        "action": "Show the synthetic Operations Dashboard. Explain the proposed monitoring workflow, then click Investigate on the frozen-stream alert. Keep the simulated-telemetry label visible."
       },
       {
-        "window": "1:20-1:42",
-        "spoken": "In the Platform's Agents area, I can start from a template or a custom agent. For an SRE use case, I'd tailor the instructions, knowledge access, and tools, including which actions need approval.",
-        "action": "Open the signed-in Platform Agents page, point to the verified custom-agent option and template gallery, then open the prepared SRE example. Show its instruction field and tool configuration. Keep credentials off screen. Show the preloaded customization instead of typing it all. Confirm account-specific labels and template availability before recording. Knowledge access needs an appropriate retrieval integration, and the application must enforce approvals."
+        "window": "2:09-3:08",
+        "spoken": "Here you can see a proposed extension to your existing application where a user can bring in incident notes, and enter a prompt specifying what they want the agent to respond to. As you can see here, we've already loaded ten of your company's sample incidents and runbooks to the OpenAI vector store, which the agent will scan through semantically. Then, it'll pass along the found context, if any, as part of its reasoning process.\n\nBy generating a triage brief, we're sending a request to the Responses API, which will take the notes and prompt, search for relevant information in our vector store, and summarize the incident as an output.\n\nYou can see Citations and Sources behind the returned guidance, where we can see it also used a connection to GitHub to scan for changes that might've been relevant to the issue we're observing as seen in these pull requests. \n\nBy viewing a citation, we can see exactly what portion of our documents were meaningfully significant - for example, here it's highlighting part of our runbook most relevant to the issue we're looking at so we can visually verify what context is being used.",
+        "action": "Show the loaded incident notes and focus question. Click Generate triage brief once. Review the actual returned guidance, GitHub PR reasons and a numbered citation with its relevance explanation and highlighted excerpt. The GitHub wording is retained at TJ’s request; implementation still supplies simulated PR fixtures, not a live connection. Do not claim completed remote ingestion solely from the app count. Remain in the browser."
       },
       {
-        "window": "1:42-1:50",
-        "spoken": "This illustrates agent configuration. The demo app calls Responses and File Search directly.",
-        "action": "Finish on the example configuration, then switch directly to the local app. Do not return to the PDF. The saved example is not the app's backend. Keep the synthetic-demo label visible."
-      },
-      {
-        "window": "1:50-2:00",
-        "spoken": "Now, let's investigate the frozen stream.",
-        "action": "In the app's Operations overview, click Investigate on the preloaded streaming alert. Confirm Incident notes and Focus question load, then click Generate triage brief once. The replay should be paused during preflight so other alerts do not distract. This ten-second slot includes navigation and a provisional generation wait."
-      },
-      {
-        "window": "2:00-2:20",
-        "spoken": "These synthetic notes say playlists return HTTP two hundred, yet playback freezes and segments are missing. A successful response doesn't prove the live playlist is advancing.",
-        "action": "Point to the supplied observations in Incident notes. Continue to the output only when the actual generated brief is ready. Keep the simulation and manual-input boundary clear. Measure the real wait during rehearsal."
-      },
-      {
-        "window": "2:20-2:40",
-        "spoken": "The next check is to compare repeated origin and CDN samples. A cache change still depends on current evidence, scope, and owner approval.",
-        "action": "Point to the supported comparison and missing evidence in the actual brief. Keep the cause conditional. Hold on the relevant recommendation for at least three seconds. Align this wording to the validated output."
-      },
-      {
-        "window": "2:40-3:15",
-        "spoken": "This citation opens the source. The runbook connects frozen playback to playlist freshness. The explanation highlights a supporting passage, and the full document lets us check its context.",
-        "action": "Click the numbered citation attached to the HTTP-200/playlist-freshness finding. Verify Live HLS playlist freshness (NS-RB-001). Show the selected statement, Why this passage is relevant, and the highlighted Retrieved excerpts. Wait for the relevance explanation before describing it. Expand Read full knowledge document to show the same passage in context. Hold silently for at least five seconds, then click Close ×. The explanation assesses evidence; it does not expose the retriever's internal reasoning or a similarity score. Stop if the returned passage does not support the spoken claim."
-      },
-      {
-        "window": "3:15-3:25",
-        "spoken": "Now, the same workflow for compute.",
-        "action": "Select Unhealthy EC2 application in Demo incident. The notes and Focus question change automatically. Click Generate triage brief once and pause for the second provisional generation wait. No PDF slide appears between the two cases."
-      },
-      {
-        "window": "3:25-3:38",
-        "spoken": "EC2 checks pass, but the application is unhealthy and supplied disk use is ninety-six percent. We need to identify what's growing.",
-        "action": "Point to the supplied disk observation and corresponding next checks in the actual brief. The assistant did not collect these metrics. Confirm disk-consumer and rotation checks against the current compute runbook during validation."
-      },
-      {
-        "window": "3:38-3:55",
-        "spoken": "This past log-rotation incident gives us a lead to test. It doesn't confirm today's cause.",
-        "action": "Open Historical case: debug logs filled an EC2 root volume. Verify NS-INC-004 and inspect the returned excerpt about debug logging and failed rotation. Hold silently for at least five seconds. Click Close ×. Do not substitute full-document content for missing retrieved evidence."
-      },
-      {
-        "window": "3:55-4:00",
-        "spoken": "That gives the engineer an inspectable next check.",
-        "action": "Switch directly from the app to slide 3 at 4:00. This ends the complete Platform and UI demo. All remaining presentation time belongs to value/guardrails and the final recap."
+        "window": "3:08-3:43",
+        "spoken": "Here’s how you could configure an agent for this workflow. In your Brightward project, you can configure an Agent from scratch, or select and modify a Template such as the SRE agent for incident response. Templates come with a pre-defined instruction set, selected Model and other model parameters.\n\nAlso, by leveraging MCP, an agent can access your data in external platforms such as Atlassian, GitHub, and AWS. Once configured, an agent can automatically choose to use these tools as needed to formulate a grounded response.",
+        "action": "Switch from the app to the prepared signed-in Platform Agents UI. Show the verified custom-agent/template controls, instructions, model and tool configuration. This illustrates an optional integration; the local app uses Responses and File Search directly. MCP access depends on configured, authorized connections. Return directly to slide 3 at 3:43."
       }
     ]
   },
   "rehearsal_setup": [
-    "Read only the Spoken narration blocks aloud. Actions and pauses are presenter cues. Exactly four PDF slides accompany one uninterrupted browser demo between slides 2 and 3. The timing targets total five minutes and have not been measured in rehearsal.",
-    "Before recording, verify the current ten-document store, review fresh streaming and compute answers and their returned excerpts, and score the six-case evaluation. Require all safety criteria to pass. Align narration with actual output before locking this draft. Existing live RDS evidence does not substitute for these two recording cases. This presentation edit requires no reindex or application change.",
-    "Prepare the four-page PDF, the app at http://127.0.0.1:8000/ (or the verified running port), the signed-in Platform Agents page and the actual remote-store evidence view. Show ten allowlisted files with completed indexing statuses matched to the current manifest. Neither a local manifest nor the app document-count label proves remote ingestion. Label any capture Previously captured: validated Brightward store.",
-    "Prepare the Platform's custom-agent option, template gallery and SRE template or saved SRE example. Check the real controls and account access before the take. The 1:20-1:42 segment illustrates customization; it does not claim the local app invokes that saved agent. If the expected template is unavailable, use a custom example and change the spoken transition to 'Here is a custom SRE example in the Platform. I can tailor its instructions, knowledge access, and tools.'",
-    "Use this prepared instruction in the SRE example: \"Help Brightward's on-call SRE triage streaming and infrastructure incidents. Use approved runbooks, incident history, and ownership guidance. Cite supporting evidence, separate observations from hypotheses, identify missing evidence, and propose the next check. Keep infrastructure changes with the engineer.\" Show the instruction field and available tool configuration. A template does not automatically have access to Brightward's store or infrastructure. Approval rules and action permissions need application enforcement.",
-    "Prepare the app on the Operations overview with the streaming alert visible, empty triage output, and the simulation paused. Click Investigate during the demo to prefill the streaming incident, then Generate triage brief. For compute, use Demo incident; it loads the fixture and question automatically. Keep the supplied questions. The app has three scenarios available; this timed take continues to use streaming and compute.",
-    "Preflight the actual source titles, relevance explanation and highlighted passages. Streaming targets NS-RB-001, Live HLS playlist freshness, through a numbered citation. Compute targets NS-INC-004, Historical case: debug logs filled an EC2 root volume, with next checks supported by NS-RB-004. Citation numbers vary. Retrieved excerpts support the findings; the full source adds context.",
-    "The whole demo runs 1:10-4:00: Platform/store 40 seconds, app 130 seconds. Keep the 2:40-3:15 streaming source inspection. Measure both generation waits, citation-explanation latency, navigation and reading time. The two ten-second app transition/generation slots are provisional. Stay in the browser throughout; return directly to slide 3 after the compute review.",
-    "If generation fails, the expected source is absent, or the passage does not support the discussion, resolve it before another take. Never describe an expected answer as an observed result. If measured waits do not fit, use a clearly labeled capture of a real validated run, say \"This is a previously captured run using the same validated store,\" and retime. Keep the capture label visible throughout playback."
+    "Read only the spoken narration aloud; action notes are presenter cues. Use four slides with the complete app-then-Platform browser demo between slides 2 and 3. The cumulative timeline is 0:00-0:48, 0:48-1:35, 1:35-3:43, 3:43-4:22 and 4:22-4:51.",
+    "TJ reported timing the script with a stopwatch just under five minutes. The supplied segment labels sum to 291 seconds, leaving nine seconds against the five-minute limit. Treat these labels as the cumulative schedule; fit real generation waits, navigation and source-reading time into the recorded take.",
+    "Use the animated four-slide deck in fslides/decks/brightward/. Keep the original Brightward-Slides.pdf intact: no new PDF exports during editing. Update narration with python tools/build-slides-pdf.py --narration-only; refresh the standalone HTML after slide changes.",
+    "Before recording, verify the ten-document remote store against its manifest, inspect a fresh streaming answer and citation explanation, and score the six-case evaluation. Require all safety criteria to pass. These checks are separate from TJ’s completed speaking rehearsal; this update changes no corpus and requires no reindex.",
+    "Prepare the app on its synthetic Operations Dashboard and the signed-in Platform Agents page. Streaming is preloaded; compute arrives after five active seconds and RDS after ten. Pause the simulation if needed. Investigate loads the incident and question; generation requires an explicit click.",
+    "The timed UI walkthrough uses the streaming incident. Compute and RDS remain available in the app without an extra scripted demo. Confirm the actual citation, supporting returned passage and relevance explanation before describing them. The explanation assesses evidence and does not reveal the retriever’s internal reasoning.",
+    "TJ intentionally retained the GitHub connection wording in the speaking script. The implementation remains local simulated PR evidence validated for the incident, outside the knowledge allowlist. The app has no live telemetry, GitHub/MCP connector or infrastructure action tools.",
+    "Verify the signed-in custom-agent/template controls and the prepared SRE example before the Platform segment. The Platform example is illustrative and is not invoked by the app. Knowledge access, external connections, approvals and action permissions require actual application integration and enforcement.",
+    "If generation or citation inspection fails, resolve it before recording. For a previously captured real validated run, keep a clear capture label visible. The thirty percent figure remains an unvalidated pilot target for time to a correct next step, not a measured remediation result."
   ],
   "product_references": [
     {
@@ -226,5 +166,7 @@
       "url": "https://developers.openai.com/cookbook/examples/agents_api/apps/sev_bot/readme",
       "note": "This example investigates evidence and records rollback approval, but does not execute a deployment. It illustrates the separation between investigation, application-owned approval and execution."
     }
-  ]
+  ],
+  "duration_seconds": 291,
+  "recording_target_seconds": 300
 }

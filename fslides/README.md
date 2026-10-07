@@ -3,8 +3,8 @@
 Installed: fslides 0.7.1, seven upstream skills adapted for Codex, and the
 `fslides-style-brightward` skill. The animated Brightward deck now lives in
 `decks/brightward/`: four slides, original SVG graphics and the approved speaker
-notes, with the demo between slides 2 and 3. The existing PDF, narration, content
-JSON and PDF builder remain in place.
+notes, with the demo between slides 2 and 3. The original PDF remains in place; narration, content
+JSON and speaker notes now reflect TJ’s revision 8 script.
 
 ## Present the Brightward deck
 
@@ -22,9 +22,16 @@ when the process starts. A browser refresh alone does not update that cached lis
 The editable source is `decks/brightward/slides/`, with a portable HTML copy at
 `decks/brightward/brightward-streaming.html`. The HTML retains animation.
 PDF exports are deferred while edits are in progress; create one only when TJ
-requests it. Refresh the HTML copy after editing. `notes.json` mirrors the
-approved talk track, including the entire 1:10-4:00 browser demo after slide 2.
-The 30% figure is an unvalidated target and future remediation is explicitly
+requests it. Refresh the HTML copy after editing. `notes.json` mirrors TJ’s
+approved script, including the entire 1:35-3:43 browser demo after slide 2: app
+first (93 seconds), then Platform Agents (35 seconds). TJ reported a stopwatch
+rehearsal under five minutes; supplied labels total 4:51. Regenerate narration
+and notes with `python3 tools/build-slides-pdf.py --narration-only`.
+TJ has locked the current slides and final script; validate them without
+changing their content or layout. Refresh the portable HTML only from those
+exact sources. The locked slide 3 uses incident-resolution/MTTR wording while
+the script uses time to a correct next step; this remains a recorded validation
+finding. The 30% figure is an unvalidated target and future remediation is explicitly
 separate from the current advisory app.
 
 The attached Elastic guide has been adapted to Brightward's approved Aurora +

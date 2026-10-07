@@ -13,10 +13,10 @@
   <main>
     <section id="monitoring-view" aria-labelledby="monitoring-title">
       <div class="page-heading"><div><p class="eyebrow">RELIABILITY OPERATIONS / DEMO WORKSPACE</p><h1 id="monitoring-title" tabindex="-1">A pulse on your platform.</h1><p class="intro">Follow the signals. Investigate the alerts. Find your next step.</p></div><span class="simulation-label"><span class="dot" aria-hidden="true"></span> Simulated telemetry</span></div>
-      <div class="simulation-bar"><div><strong id="simulation-state">Simulation running</strong><span>October 6 scenario replay · 8× clock · updates every 5s</span></div><div class="simulation-controls"><time id="replay-time"></time><button id="pause-simulation" class="quiet" type="button">Pause simulation</button><button id="restart-simulation" class="quiet" type="button">Replay</button></div></div>
+      <div class="simulation-bar"><div><strong id="simulation-state">Simulation running</strong><span>October 6 scenario replay · accelerated clock · updates every 5s</span></div><div class="simulation-controls"><time id="replay-time"></time><button id="pause-simulation" class="quiet" type="button">Pause simulation</button><button id="restart-simulation" class="quiet" type="button">Replay</button></div></div>
       <div id="metric-grid" class="metric-grid" aria-label="Synthetic service metrics"></div>
       <section class="panel alerts-panel" aria-labelledby="alerts-title">
-        <div class="panel-heading"><div><p class="eyebrow">01 / ATTENTION NEEDED</p><h2 id="alerts-title">Alert inbox <span id="alert-count" class="count-badge">1</span></h2></div><span id="alert-schedule" class="muted-chip">Next alert in 0m 15s</span></div>
+        <div class="panel-heading"><div><p class="eyebrow">01 / ATTENTION NEEDED</p><h2 id="alerts-title">Alert inbox <span id="alert-count" class="count-badge">1</span></h2></div><span id="alert-schedule" class="muted-chip">Next alert in 0m 05s</span></div>
         <div class="table-scroll"><table class="alert-table"><caption class="sr-only">Synthetic alerts and investigation actions</caption><thead><tr><th scope="col">Severity</th><th scope="col">Alert / service</th><th scope="col">Observed (UTC)</th><th scope="col">Status</th><th scope="col"><span class="sr-only">Action</span></th></tr></thead><tbody id="alert-rows"></tbody></table></div>
         <p class="panel-note">Investigate loads the incident notes and focus question. You choose when to generate a cited brief.</p>
         <p id="alert-announcement" class="sr-only" role="status" aria-live="polite"></p>
