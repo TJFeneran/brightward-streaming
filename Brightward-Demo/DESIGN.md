@@ -1,5 +1,9 @@
 # Brightward design standard
 
+The brand mark is a teal double-chevron on a rounded navy square, defined in
+`static/favicon.svg`. Use it for the UI logo, browser favicon and presentation
+footer. Keep PNG and ICO fallbacks in sync with that SVG.
+
 Approved direction: **Aurora + Modern clarity**. This implementation keeps the incident and its evidence prominent and reserves warning color for unresolved decisions. The approved monitoring extension adds a clearly labeled synthetic overview with metric trends, bounded logs and infrequent alerts. Each alert hands off to the existing evidence-focused investigation page.
 
 | Role | Token |

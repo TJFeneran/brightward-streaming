@@ -111,13 +111,12 @@ Primary controls use navy text on teal. In the light variant use white text on
 the darker teal. Keep visible keyboard focus. External links use `target="_blank"`
 with `rel="noopener"`.
 
-`data-foot="Section · tag"` on the body adds the demo UI's favicon beside the
+`data-foot="Section · tag"` on the body adds the demo UI favicon beside the
 Brightward wordmark at bottom left and mono context at bottom right.
 `data-foot="none"` hides it. The default footer discloses fictional customer and
 synthetic incidents. Use `assets/favicon.svg`, copied from
-`Brightward-Demo/static/favicon.svg`, for both the browser favicon and footer
-logo. Retain the teal double-chevron mark and navy square; do not substitute a
-text star, an Elastic logo or an OpenAI logo implying endorsement.
+`Brightward-Demo/static/favicon.svg`, for both favicon and footer logo. Retain
+the teal double-chevron mark and navy square; do not substitute a text star.
 
 ## Motion and export
 
@@ -141,9 +140,8 @@ After applying the kit, use these paths from a slide in `slides/`:
 ```
 
 `BW.fit()` scales standalone slides; it runs automatically and defers to the
-player inside its iframe. `BW.footer()` adds footer chrome using the slide's SVG
-favicon link. The kit also sets the fslides player's tab favicon from that link.
-These are the actual provided helpers; there is no `EW` dependency. Keep text in HTML if editable
+player inside its iframe. `BW.footer()` adds footer chrome. These are the actual
+provided helpers; there is no `EW` dependency. Keep text in HTML if editable
 PowerPoint export matters, since SVG becomes an image.
 
 Inspect rendered slides before exporting. Check clipping, color contrast, font

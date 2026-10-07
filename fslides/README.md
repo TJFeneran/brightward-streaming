@@ -1,9 +1,31 @@
 # Project-local fslides for Brightward
 
 Installed: fslides 0.7.1, seven upstream skills adapted for Codex, and the
-`fslides-style-brightward` skill. This setup contains tooling and a reusable style
-kit. No Brightward HTML deck, slide manifest or speaker notes were created.
-The existing PDF, narration, content JSON and PDF builder remain in place.
+`fslides-style-brightward` skill. The animated Brightward deck now lives in
+`decks/brightward/`: four slides, original SVG graphics and the approved speaker
+notes, with the demo between slides 2 and 3. The existing PDF, narration, content
+JSON and PDF builder remain in place.
+
+## Present the Brightward deck
+
+From the project root:
+
+```fish
+cd "/home/tj/Documents/Brightward Streaming"
+npm run slides -- --deck fslides/decks/brightward serve
+```
+
+Open `http://localhost:3000/`. If the server was started with the default starter,
+stop it with Ctrl+C and run the command again: fslides 0.7.1 caches its manifest
+when the process starts. A browser refresh alone does not update that cached list.
+
+The editable source is `decks/brightward/slides/`, with a portable HTML copy at
+`decks/brightward/brightward-streaming.html`. The HTML retains animation.
+PDF exports are deferred while edits are in progress; create one only when TJ
+requests it. Refresh the HTML copy after editing. `notes.json` mirrors the
+approved talk track, including the entire 1:10-4:00 browser demo after slide 2.
+The 30% figure is an unvalidated target and future remediation is explicitly
+separate from the current advisory app.
 
 The attached Elastic guide has been adapted to Brightward's approved Aurora +
 Modern clarity identity: navy/teal, Sora/Inter/IBM Plex Mono, readable body text,
@@ -35,12 +57,12 @@ next turn; if the selector does not refresh, reopen the chat or restart Codex.
 Invoke `$fslides-deck` or `$fslides-style-brightward` explicitly when useful.
 These skills apply to fslides work and do not replace the existing PDF workflow.
 
-## Create a deck yourself when ready
+## Create another deck when ready
 
 Run this only when you want to begin authoring:
 
 ```sh
-npm run slides -- create fslides/decks/brightward --style brightward
+npm run slides -- create fslides/decks/my-next-deck --style brightward
 ```
 
 This creates the upstream minimal starter with Brightward style assets and a
@@ -69,6 +91,8 @@ npm run slides -- --deck fslides/decks/brightward pdf
 ```
 
 Stop the server with Ctrl+C. The fslides player opens at `http://localhost:3000/`.
+If an older starter message tells you to run `fuckslides serve`, use the project
+launcher command above instead. There is no global `fuckslides` command installed.
 Use arrows to navigate, N for notes, G for overview and F for fullscreen.
 No GitHub Pages workflow, comment gateway or hosting is enabled by this setup.
 Keep publishing as a separate deliberate action. A private source repository does

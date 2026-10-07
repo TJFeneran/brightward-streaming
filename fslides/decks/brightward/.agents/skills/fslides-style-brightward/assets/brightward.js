@@ -27,7 +27,7 @@
     brand.append(document.createTextNode('BRIGHTWARD'));
     const tag = document.createElement('span');
     tag.className = 'bw-tag';
-    tag.textContent = document.body.dataset.foot || 'Media streaming · Synthetic incidents';
+    tag.textContent = document.body.dataset.foot || 'Fictional customer · Synthetic incidents';
     el.append(brand, tag);
     document.body.append(el);
   }

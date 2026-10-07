@@ -8,7 +8,11 @@ The existing PDF and narration come from `presentation/content.json` and
 For requested fslides work, use the project-local skills in `.agents/skills` and
 the pinned launcher `npm run slides --`. See `fslides/README.md` for manual setup.
 The Brightward style kit lives in `fslides/styles/brightward`; default to its
-palette and local fonts. The setup deliberately includes no authored HTML deck.
+palette and local fonts. The animated deck lives in `fslides/decks/brightward/`.
+Preserve its four-slide order and the demo break; notes mirror the approved
+narration. fslides 0.7.1 needs a server restart after manifest changes.
+TJ requested no new PDF exports while this deck is being edited; export a PDF
+only when requested. Keep the existing original PDF in place.
 
 Current app behavior provides grounded triage suggestions via Responses/File
 Search and makes no infrastructure changes. Label synthetic incidents, targets

@@ -59,16 +59,33 @@ function repairBrightwardExport(deckDir, outputName) {
   const match = marker.exec(html);
   if (!match) throw new Error('Export contents could not be located.');
   const contents = JSON.parse(match[1]);
+  const iconPath = path.join(deckDir, config.slidesDir || 'slides', 'style', 'favicon.svg');
+  const iconData = fs.existsSync(iconPath)
+    ? 'data:image/svg+xml;base64,' + fs.readFileSync(iconPath).toString('base64')
+    : null;
   for (const [file, content] of Object.entries(contents)) {
     contents[file] = content.replace(/url\(['"]?(fonts\/[A-Za-z0-9-]+\.ttf)['"]?\)/g, (original, font) => {
       const source = path.join(deckDir, config.slidesDir || 'slides', 'style', font);
       if (!fs.existsSync(source)) throw new Error('Missing export font: ' + font);
       return 'url("data:font/ttf;base64,' + fs.readFileSync(source).toString('base64') + '")';
     }).replace(/(<script\b[^>]*\bsrc=['"])data:application\/octet-stream;base64,/g, '$1data:text/javascript;base64,');
+    if (iconData) contents[file] = contents[file].replace(
+      /href=(['"])style\/favicon\.svg(?:\?[^'"]*)?\1/g,
+      () => 'href="' + iconData + '"').replace(/<img\b[^>]*>/gi, tag => {
+        // The visual editor saves resolved localhost URLs. Embed the brand mark
+        // by its class so saved footers also work without a running server.
+        const classes = /\bclass\s*=\s*(['"])(.*?)\1/i.exec(tag);
+        if (!classes || !classes[2].split(/\s+/).includes('bw-logo')) return tag;
+        return tag.replace(/\bsrc\s*=\s*(['"]).*?\1/i, () => 'src="' + iconData + '"');
+      });
   }
   const json = JSON.stringify(contents).replace(/<\/(script)/gi, '<\\/$1');
-  fs.writeFileSync(out, html.replace(marker, () => 'window.FUCKSLIDES_CONTENTS = ' + json + ';'));
-  console.log('Brightward export: local fonts embedded and script MIME types corrected.');
+  let repaired = html.replace(marker, () => 'window.FUCKSLIDES_CONTENTS = ' + json + ';');
+  if (iconData) repaired = repaired
+    .replace(/<link\s+rel=["']icon["'][^>]*>/gi, '')
+    .replace('<head>', '<head>\n  <link rel="icon" type="image/svg+xml" sizes="any" href="' + iconData + '">');
+  fs.writeFileSync(out, repaired);
+  console.log('Brightward export: fonts and favicon/footer SVG embedded; script MIME types corrected.');
 }
 
 async function doctor() {
@@ -118,10 +135,26 @@ async function main() {
   if (styleIndex >= 0 && args[styleIndex + 1] === 'brightward') args[styleIndex + 1] = kit;
   const applyingKit = ['style', 'kit'].includes(args[0]) && args[1] === 'use' && args[2] === 'brightward';
   if (applyingKit) args[2] = kit;
-  const result = spawnSync(process.execPath, [cli, ...args], { cwd, env: process.env, stdio: 'inherit' });
+  const creating = args[0] === 'create';
+  const result = spawnSync(process.execPath, [cli, ...args], {
+    cwd, env: process.env, encoding: 'utf8',
+    stdio: creating ? ['inherit', 'pipe', 'inherit'] : 'inherit',
+  });
   if (result.error) throw result.error;
-  if (result.status !== 0) { process.exitCode = result.status || 1; return; }
-  if (args[0] === 'create') fixStarter(path.resolve(cwd, args[1]));
+  if (result.status !== 0) {
+    if (creating && result.stdout) process.stdout.write(result.stdout);
+    process.exitCode = result.status || 1;
+    return;
+  }
+  if (creating) {
+    const deckDir = path.resolve(cwd, args[1]);
+    fixStarter(deckDir);
+    const quote = value => "'" + value.replaceAll("'", "'\\''") + "'";
+    console.log('\nCreated presentation: ' + args[1]);
+    console.log('\nStart it with the project-local launcher:');
+    console.log('  cd ' + quote(root));
+    console.log('  npm run slides -- --deck ' + quote(path.relative(root, deckDir) || '.') + ' serve\n');
+  }
   if (applyingKit) useCodexSkill(cwd);
   if (args[0] === 'export') repairBrightwardExport(cwd, args[1] && !args[1].startsWith('-') ? args[1] : undefined);
 }

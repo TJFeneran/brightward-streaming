@@ -24,10 +24,12 @@ The default model is `gpt-5.4-mini` for triage and source explanations, overrida
 
 ## Working files
 
-The project also has a local [fslides setup for Codex](fslides/README.md), including
-an adapted Brightward style guide. It is ready for manual HTML deck authoring;
-installation did not create or replace the presentation. Run `npm run slides:doctor`
-to check it, or `npm run slides -- --help` for commands.
+The project also has an [animated four-slide fslides deck](fslides/README.md) in
+`fslides/decks/brightward/`, using the adapted Brightward style. Its speaker notes
+retain the approved flow and the full demo between slides 2 and 3. Run
+`npm run slides -- --deck fslides/decks/brightward serve` from this root to present
+it. The existing PDF and its source remain available. Run `npm run slides:doctor`
+to check the tooling, or `npm run slides -- --help` for commands.
 
 - [Slides](Brightward-Slides.pdf) and [rehearsal script](Brightward-Slide-Copy-and-Narration.md): four slides; draft 7 has 434 spoken words. Situation, Platform/API, value/guardrails, then next steps/recap. The entire Platform Agents and app demo runs between slides 2 and 3 (1:10-4:00). Recording lock awaits validation, evaluation and timed rehearsal.
 - `presentation/` and `tools/build-slides-pdf.py`: editable content, fonts and PDF builder.

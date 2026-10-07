@@ -1,5 +1,10 @@
 {
   "name": "brightward",
   "description": "Brightward Aurora + Modern clarity: navy, teal, local Sora/Inter/IBM Plex Mono, and explanatory technical diagrams",
-  "assets": ["brightward.css", "brightward.js", "favicon.svg", "fonts/"]
+  "assets": [
+    "brightward.css",
+    "brightward.js",
+    "fonts/",
+    "favicon.svg"
+  ]
 }

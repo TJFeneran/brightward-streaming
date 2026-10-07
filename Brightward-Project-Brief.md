@@ -1,8 +1,23 @@
 # Brightward: OpenAI vector store demo
 
-Authoritative local project brief. Updated October 7, 2026, America/New_York. TJ's four-slide flow below supersedes the earlier five-slide presentation. Brightward Streaming and PDF-only slides remain approved. The board is a derived summary; if it differs, follow this brief.
+Authoritative local project brief. Updated October 7, 2026, America/New_York. TJ's four-slide flow below supersedes the earlier five-slide presentation. Brightward Streaming remains approved; TJ's latest request also adds an animated fslides version. The board is a derived summary; if it differs, follow this brief.
 
 ## Resume here
+
+### Animated HTML slides, October 7
+
+At TJ's request, `fslides/decks/brightward/` now contains an animated four-slide
+version of the approved flow, inspired by the supplemental diagrams in the linked
+Elastic presentation. It uses Brightward's navy/teal identity, isometric SVG
+assembly, moving retrieval connectors, an explicitly unvalidated pilot-target
+comparison and a proposed rollout graphic. `notes.json` retains draft 7's talk
+track and the full demo between slides 2 and 3. A standalone HTML copy lives
+beside the manifest. TJ requested no PDF exports during this editing phase.
+The original PDF, content JSON and narration remain intact.
+This is a presentation-format addition, not a change to the app, knowledge corpus
+or validation/recording gates. Start the local deck with the launcher documented
+in `fslides/README.md`; restart an already-running starter server once to load
+the four-slide manifest.
 
 ### Approved presentation flow, October 7
 
@@ -52,7 +67,7 @@ Validation: 32 offline Python tests and three Markdown-renderer checks passed. T
 
 Narration and slides share `presentation/content.json`. Make the next script changes there, then use `tools/build-slides-pdf.py` to regenerate `Brightward-Slide-Copy-and-Narration.md` and `Brightward-Slides.pdf` together. Do not edit only the generated narration file. Retain the approved Aurora/Modern clarity design. The approved phrase “Manually search runbooks” now appears on slide 1, and “Review a grounded, cited investigation plan” remains on slide 2.
 
-**PDF-only slides remain required.** The active deck is built directly with ReportLab and local fonts. There is no active HTML slide source or browser-to-PDF step. The retired HTML deck/exporter were removed during cleanup; app and project-board HTML remain valid interfaces. Do not add features, extra slides, production actions or new integrations during script polish.
+**The original PDF workflow remains available.** Its deck is built directly with ReportLab and local fonts. TJ's later request authorizes the new animated fslides deck described above; its local export is separate from `Brightward-Slides.pdf`. Keep the four-slide flow and current/future capability distinction in both formats. Do not add app features, extra slides or production actions during presentation work.
 
 ### Runtime handoff
 

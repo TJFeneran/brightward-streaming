@@ -1,0 +1,16 @@
+{
+  "name": "brightward",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "serve": "fslides serve",
+    "pdf": "fslides pdf",
+    "gif": "fslides gif"
+  },
+  "devDependencies": {
+    "fslides": "0.7.1"
+  },
+  "allowScripts": {
+    "puppeteer@24.43.1": true
+  }
+}
