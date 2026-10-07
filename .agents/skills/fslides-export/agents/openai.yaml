@@ -1,0 +1,4 @@
+interface:
+  display_name: "fslides export"
+  short_description: "Export fslides as HTML, PDF or editable PowerPoint"
+  default_prompt: "Use $fslides-export for the fslides work I request."

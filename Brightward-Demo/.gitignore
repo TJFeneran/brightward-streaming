@@ -1,0 +1,6 @@
+.env
+.venv/
+.northstar/
+__pycache__/
+.pytest_cache/
+results/

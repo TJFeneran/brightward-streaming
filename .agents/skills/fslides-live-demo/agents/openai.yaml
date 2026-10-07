@@ -1,0 +1,4 @@
+interface:
+  display_name: "fslides live demo"
+  short_description: "Build an explicitly requested interactive demo slide"
+  default_prompt: "Use $fslides-live-demo for the fslides work I request."

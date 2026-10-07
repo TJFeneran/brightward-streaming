@@ -1,0 +1,4 @@
+interface:
+  display_name: "fslides cleanup"
+  short_description: "Tighten slide wording and simplify the visual structure"
+  default_prompt: "Use $fslides-clean-deck for the fslides work I request."

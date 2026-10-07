@@ -1,0 +1,10 @@
+Synthetic Brightward incident - supplied by the on-call SRE
+Service: Playback-session API on EC2 instance ns-session-42
+Environment: production
+Observed at: 2026-10-06 20:12 UTC
+- Application health endpoint is failing; some session requests return 503.
+- EC2 system and instance status checks are passing.
+- Engineer's OS snapshot reports root filesystem 96% used, rising from 72% over 20 minutes.
+- Application deployment completed at 19:50 UTC.
+Unknown: largest growing directory, inode use, write errors, logging level, rotation status, affected request scope.
+No remediation has been performed.

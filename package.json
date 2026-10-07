@@ -1,0 +1,14 @@
+{
+  "name": "brightward-streaming",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Brightward demo and project-local fslides tooling",
+  "scripts": {
+    "slides": "node tools/fslides.cjs",
+    "slides:doctor": "node tools/fslides.cjs doctor",
+    "slides:browser": "node tools/fslides.cjs browser install"
+  },
+  "devDependencies": {
+    "fslides": "0.7.1"
+  }
+}

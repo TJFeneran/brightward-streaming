@@ -1,0 +1,74 @@
+// Simulated GitHub context supplies generated reasons and decorative source pills.
+const {chromium} = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
+const assert = require('node:assert/strict');
+const fs = require('node:fs');
+const path = require('node:path');
+(async () => {
+  const browser = await chromium.launch({headless:true});
+  try {
+    const page = await browser.newPage({viewport:{width:1440,height:1050}});
+    const errors = [], requests = [];
+    page.on('pageerror', e => errors.push(e.message));
+    await page.route('https://fonts.googleapis.com/**', r => r.abort());
+    await page.route('**/api/status', r => r.fulfill({json:{ready:true,label:'UI TEST · NOT LIVE'}}));
+    const output = path.join(__dirname,'../test-results'); fs.mkdirSync(output,{recursive:true});
+    await page.route('**/api/triage', async r => {
+      const request = r.request().postDataJSON(); requests.push(request);
+      const reason = request.scenario === 'database' ? 'GitHub PR #318 (brightward-demo/catalog-api): larger pools could exhaust the shared connection budget.' : request.scenario === 'streaming' ? 'GitHub PR #142 (brightward-demo/delivery-infra): the cache-policy change could affect playlist freshness.' : 'GitHub PR #287 (brightward-demo/session-api): verbose logging could contribute to log growth.';
+      await r.fulfill({json:{text:`## Observed facts\nUI TEST ONLY.\n## Possible reasons\n${reason} Deployment and causation remain unverified.\n## Next checks\nCheck effective settings.\n## Resolution path\nConditional on evidence.\n## Missing evidence\nEffective host configuration.`,sources:[],annotations:[]}});
+    });
+    await page.goto((process.env.BASE_URL || 'http://127.0.0.1:8000')+'/#triage');
+    assert.equal(await page.locator('#changes-panel').count(),0);
+    const generate = async () => {
+      await page.getByRole('button',{name:/Generate triage brief/}).click();
+      await page.getByText('Ready for review',{exact:true}).waitFor();
+    };
+    await page.locator('#scenario').selectOption('streaming');
+    await page.waitForFunction(() => document.getElementById('incident').value.includes('19:42 UTC'));
+    assert.equal(await page.getByText('Possible reasons to investigate',{exact:true}).count(),0);
+    assert.equal(await page.locator('.change-card').count(),0);
+    await generate();
+    assert.deepEqual(requests[0].change_ids,['streaming-142','streaming-139']);
+    assert((await page.locator('#brief').innerText()).includes('PR #142'));
+    assert.equal(await page.locator('#brief h3').count(),5);
+    assert.equal(await page.locator('#brief .github-source-tag').innerText(),'GitHub PRs');
+    assert.deepEqual(await page.locator('.pr-source > span:first-child').allTextContents(), ['PR #142', 'PR #139']);
+    assert.equal(await page.locator('.pr-source[href]').count(), 0);
+    const originalURL = page.url();
+    await page.locator('.pr-source').first().dispatchEvent('click');
+    assert.equal(page.url(), originalURL);
+    await page.locator('#scenario').selectOption('compute');
+    await page.waitForFunction(() => document.getElementById('incident').value.includes('96%'));
+    assert.equal(await page.locator('#brief').isVisible(),false);
+    assert.equal(await page.locator('.pr-source').count(), 0);
+    await generate();
+    assert.deepEqual(requests[1].change_ids,['compute-287','compute-284']);
+    assert.equal(requests[1].scenario,'compute');
+    assert((await page.locator('#brief').innerText()).includes('PR #287'));
+    assert(!(await page.locator('#brief').innerText()).includes('PR #142'));
+    assert.deepEqual(await page.locator('.pr-source > span:first-child').allTextContents(), ['PR #287', 'PR #284']);
+    await page.locator('#scenario').selectOption('database');
+    await page.waitForFunction(() => document.getElementById('incident').value.includes('bw-catalog-db'));
+    assert.equal(await page.locator('#brief').isVisible(),false);
+    await generate();
+    assert.deepEqual(requests[2].change_ids,['database-318','database-311']);
+    assert((await page.locator('#brief').innerText()).includes('PR #318'));
+    assert(!(await page.locator('#brief').innerText()).includes('PR #287'));
+    assert.deepEqual(await page.locator('.pr-source > span:first-child').allTextContents(), ['PR #318', 'PR #311']);
+    await page.screenshot({path:path.join(output,'github-brief-only.png'),fullPage:true});
+    await page.setViewportSize({width:390,height:844});
+    assert(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
+    await page.screenshot({path:path.join(output,'github-brief-only-mobile.png'),fullPage:true});
+    await page.route('**/api/sample?scenario=streaming', r => r.fulfill({status:503,json:{detail:'UI TEST sample failure'}}));
+    await page.locator('#scenario').selectOption('streaming');
+    await page.getByText('UI TEST sample failure',{exact:true}).waitFor();
+    await page.locator('#incident').fill('Manual incident after failed sample load.');
+    await page.locator('#question').fill('What should I check?');
+    await generate();
+    assert.deepEqual(requests[3].change_ids,[]);
+    assert.equal(await page.locator('#brief .github-source-tag').count(),0);
+    assert.equal(await page.locator('.pr-source').count(),0);
+    assert.deepEqual(errors,[]);
+    console.log('PASS: no upfront GitHub panel, candidate PRs automatically included for all three scenarios, generated possible reasons retained, stale evidence cleared on switching/failure, responsive layout; model output mocked.');
+  } finally { await browser.close(); }
+})().catch(e => {console.error(e);process.exit(1)});

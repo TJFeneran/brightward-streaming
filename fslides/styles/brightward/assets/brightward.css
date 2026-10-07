@@ -1,0 +1,59 @@
+@font-face{font-family:Sora;src:url('fonts/Sora-500.ttf') format('truetype');font-weight:500;font-display:swap}
+@font-face{font-family:Inter;src:url('fonts/Inter-400.ttf') format('truetype');font-weight:400;font-display:swap}
+@font-face{font-family:Inter;src:url('fonts/Inter-500.ttf') format('truetype');font-weight:500;font-display:swap}
+@font-face{font-family:Inter;src:url('fonts/Inter-600.ttf') format('truetype');font-weight:600;font-display:swap}
+@font-face{font-family:'IBM Plex Mono';src:url('fonts/IBM-Plex-Mono-400.ttf') format('truetype');font-weight:400;font-display:swap}
+:root{
+  color-scheme:dark;
+  --bg:#0B1220;--surface:#162235;--ink:#EEF4FA;--muted:#A9B9CF;
+  --accent:#5EEAD4;--accent-d:#11796C;--line:#314158;
+  --ready:#86EFAC;--warning:#FBBF24;--error:#FDA4AF;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{width:100%;height:100%;overflow:hidden;background:var(--bg)}
+body{
+  margin:0;position:absolute;width:1280px;height:720px;overflow:hidden;
+  padding:56px 72px;background:var(--bg);color:var(--ink);
+  font:400 24px/1.4 Inter,Arial,sans-serif;
+}
+body.soft{background:var(--surface)}
+body.light{
+  color-scheme:light;--bg:#FFFFFF;--surface:#F5F7FA;--ink:#0B1220;
+  --muted:#52647A;--accent:#11796C;--line:#CBD5E1;
+  --ready:#216B3B;--warning:#8B5A00;--error:#B4233B;
+}
+h1,h2,h3,p{margin:0}
+h1,h2,h3{font-family:Sora,Inter,sans-serif;font-weight:500;text-wrap:balance}
+h1{font-size:54px;line-height:1.08;letter-spacing:-.03em;max-width:1080px}
+h2{font-size:32px;line-height:1.2;letter-spacing:-.02em}
+.hero{font-size:84px;line-height:1.04;max-width:650px}
+.b,.accent{color:var(--accent)}
+.sub{font-size:24px;line-height:1.4;color:var(--muted);margin-top:20px;max-width:700px}
+.eyebrow{font:400 14px/1.3 'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:24px}
+.eyebrow::before{content:'';display:inline-block;width:7px;height:7px;margin-right:10px;background:var(--accent)}
+.columns{display:grid;grid-template-columns:500px 1fr;gap:48px;align-items:center;min-height:510px}
+.columns .sub{max-width:500px}
+.visual{min-width:0;position:relative}
+.visual svg{display:block;max-width:100%;height:auto}
+.card{border:1px solid var(--line);border-radius:12px;padding:24px;background:var(--surface)}
+.chip{display:inline-block;border:1px solid var(--line);border-radius:4px;padding:5px 10px;font:400 14px/1.4 'IBM Plex Mono',monospace}
+.stat{font:500 88px/1 Inter,sans-serif;letter-spacing:-3px;color:var(--accent)}
+.diagram-label{font:500 22px/1.3 Inter,sans-serif;fill:var(--ink);color:var(--ink)}
+.meta{font:400 14px/1.4 'IBM Plex Mono',monospace;color:var(--muted)}
+.status-ready{color:var(--ready)}.status-warning{color:var(--warning)}.status-error{color:var(--error)}
+.btn{display:inline-block;border:1.5px solid var(--accent);border-radius:8px;padding:10px 16px;background:transparent;color:var(--accent);font:500 22px/1.3 Inter,sans-serif;text-decoration:none;cursor:pointer}
+.btn.primary{background:var(--accent);color:var(--bg)}
+a{color:var(--accent)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:4px}
+.bw-footer{position:absolute;left:72px;right:220px;bottom:22px;display:flex;align-items:center;justify-content:space-between;gap:24px;border-top:1px solid var(--line);padding-top:12px;font:400 12px/1.4 'IBM Plex Mono',monospace;color:var(--muted)}
+.bw-wordmark{font:600 14px/1.4 Inter,sans-serif;letter-spacing:.08em;color:var(--ink)}
+.bw-wordmark::before{content:'✦';color:var(--accent);margin-right:9px}
+.bw-tag{max-width:850px;text-align:right}
+@keyframes bw-enter{from{opacity:0;translate:0 12px}to{opacity:1;translate:0 0}}
+.in1,.in2,.in3,.in4,.in5,.in6{animation:bw-enter .45s both}
+.in1{animation-delay:0s}.in2{animation-delay:.15s}.in3{animation-delay:.3s}
+.in4{animation-delay:.45s}.in5{animation-delay:.6s}.in6{animation-delay:.75s}
+html.bw-static .in1,html.bw-static .in2,html.bw-static .in3,html.bw-static .in4,html.bw-static .in5,html.bw-static .in6{animation:none;opacity:1;translate:none}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+@media print{body{transform:none!important;left:0!important;top:0!important}.in1,.in2,.in3,.in4,.in5,.in6{animation:none!important;opacity:1;translate:none}}
+@page{size:1280px 720px;margin:0}

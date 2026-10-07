@@ -1,0 +1,16 @@
+Service: Live video delivery through CloudFront
+Environment: Production
+Incident observed: 19:42 UTC
+
+Symptoms:
+- Viewers report frozen playback and failures to start a live event.
+- Sampled media-playlist requests return HTTP 200.
+- Some associated video-segment requests return HTTP 404.
+
+Recent changes:
+- A CloudFront distribution configuration update was submitted at 19:35 UTC.
+
+Checks completed:
+- The live packager health check is passing.
+- Playlist freshness, rollout state, and impact across locations/devices
+  have not yet been checked.

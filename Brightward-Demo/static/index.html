@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Brightward · Operations overview</title>
+  <link rel="icon" href="/static/favicon.ico" sizes="16x16 32x32 48x48">
+  <link rel="icon" href="/static/favicon.svg" type="image/svg+xml" sizes="any">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&family=Inter:wght@400;500;600&family=Sora:wght@500&display=swap">
+  <link rel="stylesheet" href="/static/app.css"><script defer src="/static/vendor/markdown-it.min.js"></script><script defer src="/static/source-markdown.js"></script><script defer src="/static/source-highlights.js"></script><script defer src="/static/app.js"></script><script defer src="/static/monitoring.js"></script>
+</head>
+<body>
+  <header class="topbar"><a class="brand" href="#monitoring" aria-label="Brightward home"><span class="mark" aria-hidden="true">✳</span> BRIGHTWARD<span class="brand-sub">STREAMING</span></a><nav class="view-nav" aria-label="Workspace"><a id="monitoring-link" href="#monitoring" aria-current="page">Operations Dashboard</a><a id="triage-link" href="#triage">Investigation</a></nav><span class="badge">Synthetic demo · Advisory only</span></header>
+  <main>
+    <section id="monitoring-view" aria-labelledby="monitoring-title">
+      <div class="page-heading"><div><p class="eyebrow">RELIABILITY OPERATIONS / DEMO WORKSPACE</p><h1 id="monitoring-title" tabindex="-1">A pulse on your platform.</h1><p class="intro">Follow the signals. Investigate the alerts. Find your next step.</p></div><span class="simulation-label"><span class="dot" aria-hidden="true"></span> Simulated telemetry</span></div>
+      <div class="simulation-bar"><div><strong id="simulation-state">Simulation running</strong><span>October 6 scenario replay · 8× clock · updates every 5s</span></div><div class="simulation-controls"><time id="replay-time"></time><button id="pause-simulation" class="quiet" type="button">Pause simulation</button><button id="restart-simulation" class="quiet" type="button">Replay</button></div></div>
+      <div id="metric-grid" class="metric-grid" aria-label="Synthetic service metrics"></div>
+      <section class="panel alerts-panel" aria-labelledby="alerts-title">
+        <div class="panel-heading"><div><p class="eyebrow">01 / ATTENTION NEEDED</p><h2 id="alerts-title">Alert inbox <span id="alert-count" class="count-badge">1</span></h2></div><span id="alert-schedule" class="muted-chip">Next alert in 0m 15s</span></div>
+        <div class="table-scroll"><table class="alert-table"><caption class="sr-only">Synthetic alerts and investigation actions</caption><thead><tr><th scope="col">Severity</th><th scope="col">Alert / service</th><th scope="col">Observed (UTC)</th><th scope="col">Status</th><th scope="col"><span class="sr-only">Action</span></th></tr></thead><tbody id="alert-rows"></tbody></table></div>
+        <p class="panel-note">Investigate loads the incident notes and focus question. You choose when to generate a cited brief.</p>
+        <p id="alert-announcement" class="sr-only" role="status" aria-live="polite"></p>
+      </section>
+      <section class="panel logs-panel" aria-labelledby="logs-title"><div class="panel-heading"><div><p class="eyebrow">02 / EVENT STREAM</p><h2 id="logs-title">Recent logs</h2></div><span class="muted-chip">Synthetic · latest 8 events</span></div><div id="log-list" class="log-list" role="list" aria-label="Recent synthetic logs"></div></section>
+      <div class="page-footer"><span>BRIGHTWARD / SIMULATED OPERATIONS</span><span>Demo signals only · no live infrastructure connected</span></div>
+    </section>
+    <section id="triage-view" aria-label="Incident investigation" hidden>
+    <div class="page-heading"><div><p class="eyebrow">OPENAI VECTOR STORE / INCIDENT TRIAGE</p><h1>Investigate with context</h1><p class="intro">Use runbooks and past incidents to build an evidence-backed triage plan.</p></div><span id="status" class="status">Checking setup…</span></div>
+    <div class="workspace">
+      <section class="panel context" aria-labelledby="context-title">
+        <div class="panel-heading"><div><p class="eyebrow">01 / CONTEXT</p><h2 id="context-title">What’s happening?</h2></div><button id="load-sample" class="quiet" type="button" disabled>Load demo</button></div>
+        <label for="scenario">Demo incident</label>
+        <select id="scenario"><option value="" selected disabled>Select Incident...</option><option value="streaming">Frozen live stream</option><option value="compute">Unhealthy EC2 application</option><option value="database">RDS connection pressure</option></select>
+        <form id="triage-form">
+          <label for="incident">Incident notes</label>
+          <textarea id="incident" name="incident" minlength="10" maxlength="12000" required placeholder="Paste the timeline, symptoms, and observations you have so far."></textarea>
+          <label for="question">Focus question</label>
+          <textarea id="question" name="question" minlength="3" maxlength="2000" required placeholder="Select an incident or enter your focus question."></textarea>
+          <button id="generate" class="primary" type="submit" disabled>Generate triage brief <span aria-hidden="true">↗</span></button>
+        </form>
+        <p id="setup-note" class="setup-note" hidden>Complete the one-time API and knowledge setup in the README to generate a live brief.</p>
+        <div class="knowledge-note"><span class="knowledge-icon" aria-hidden="true">▤</span><div><strong id="knowledge-count">10 operational documents</strong><p>One OpenAI vector store: runbooks, past incidents, and ownership.</p></div></div>
+      </section>
+      <section class="panel output" aria-labelledby="brief-title" aria-busy="false">
+        <div class="panel-heading"><div><p class="eyebrow">02 / TRIAGE</p><h2 id="brief-title">Your next move, with evidence.</h2></div><span id="result-label" class="muted-chip">Awaiting context</span></div>
+        <div id="message" role="status" aria-live="polite"></div>
+        <div id="empty" class="empty"><div class="empty-symbol" aria-hidden="true">⌁</div><h3>Start with what you know.</h3><p>Choose and load an incident, then generate a brief with prioritized checks and a conditional resolution path.</p><div class="steps"><span>Facts</span><span>Checks</span><span>Resolution</span><span>Evidence gaps</span></div></div>
+        <article id="brief" hidden></article>
+        <div id="evidence" hidden><div class="evidence-heading"><h3>Sources behind the guidance</h3><span>Open to inspect</span></div><div id="source-list"></div><p class="citation-note">Citations identify retrieved files. Check the excerpts for support.</p></div>
+        <footer class="output-footer"><span class="dot" aria-hidden="true"></span> Recommendations require evidence and human review. No infrastructure changes are made.</footer>
+      </section>
+    </div>
+    <div class="page-footer"><span>BRIGHTWARD / DEMO WORKSPACE</span><span>Context → cited guidance → reviewed resolution</span></div>
+    </section>
+  </main>
+  <dialog id="source-dialog" aria-labelledby="source-title"><div class="dialog-top"><p class="eyebrow">SOURCE INSPECTION</p><button id="close-source" class="quiet" aria-label="Close source" type="button">Close ×</button></div><h2 id="source-title"></h2><p id="source-meta" class="source-meta"></p><section class="source-relevance" aria-labelledby="source-relevance-title"><p class="eyebrow">STATEMENT → SUPPORTING PASSAGE</p><p id="source-statement"></p><h3 id="source-relevance-title">Why this passage is relevant</h3><p id="source-highlight-note" role="status"></p><p class="highlight-note">Model explanation of retrieved evidence · Highlighted quotes are checked against the returned text.</p></section><h3>Retrieved excerpts</h3><div id="source-excerpts"></div><details id="full-document"><summary>Read full knowledge document</summary><p id="document-highlight-note" class="highlight-note" hidden></p><div id="document-content" class="markdown-body"></div></details></dialog>
+</body>
+</html>

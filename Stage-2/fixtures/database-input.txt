@@ -1,0 +1,14 @@
+Synthetic Brightward incident - supplied by the on-call SRE
+Service: Catalog API backed by RDS PostgreSQL writer bw-catalog-db
+Environment: production; application connects directly to RDS (no proxy)
+Observed at: 2026-10-06 20:16 UTC
+- Catalog requests are timing out; application logs report connection pool acquisition timeout.
+- Pool acquisition p95 rose from 40 ms to 2600 ms. Query execution latency has not been isolated.
+- DatabaseConnections rose from approximately 180 to 492 over two minutes.
+- RDS reports available; CPU is 34%; no failover event is reported in the supplied window.
+- A database log sample reports: FATAL: remaining connection slots are reserved.
+- Catalog replicas increased from 12 to 24 at 20:14 UTC.
+- A catalog deployment was submitted at 20:11 UTC; effective pool configuration and rollout state are unverified.
+- Last reviewed max_connections is 500 and total application budget is 450; effective settings and reserved slots have not been rechecked.
+Unknown: sessions by application/state, transaction age, lock blockers, effective pool maximum, processes per replica, other client usage, freeable memory, worker deployment, affected request scope.
+No remediation has been performed.

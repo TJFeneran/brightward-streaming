@@ -1,0 +1,4 @@
+interface:
+  display_name: "fslides style kits"
+  short_description: "Apply and maintain reusable fslides design kits"
+  default_prompt: "Use $fslides-style for the fslides work I request."

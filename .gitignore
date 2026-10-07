@@ -1,0 +1,28 @@
+Brightward-Demo/.venv/
+Brightward-Demo/.env
+Brightward-Demo/.northstar/
+**/__pycache__/
+**/.pytest_cache/
+Brightward-Demo/test-results/
+tmp/
+
+# Project-local slide tooling and exports
+node_modules/
+**/node_modules/
+.npm/
+fslides/decks/**/_site/
+fslides/decks/**/dist/
+
+# Credentials, local environments, runtime state and recordings
+**/.env
+**/.env.*
+!**/.env.example
+**/.northstar/
+**/.venv/
+**/venv/
+.aws/
+*.pem
+*.key
+**/slides/recordings/
+**/test-results/
+**/.DS_Store

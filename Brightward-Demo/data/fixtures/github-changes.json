@@ -1,0 +1,134 @@
+{
+  "streaming": [
+    {
+      "id": "streaming-142",
+      "number": 142,
+      "title": "Reuse shared cache policy for live playlists",
+      "repository": "brightward-demo/delivery-infra",
+      "author": "maya-demo",
+      "merged_at": "2026-10-06T19:30:00Z",
+      "deployment": "Configuration submitted at 19:35 UTC; edge rollout unverified.",
+      "relevance": "Possible contributor",
+      "possible_reason": "A different playlist cache policy could serve older playlists while their HTTP responses still succeed.",
+      "verify": "Check the effective playlist behavior, rollout state and repeated origin/CDN sequence progression. A diff alone does not establish edge freshness.",
+      "file": "terraform/cloudfront/live.tf",
+      "diff": "@@ ordered_cache_behavior: live playlists @@\n  path_pattern = \"/live/*.m3u8\"\n- cache_policy_id = aws_cloudfront_cache_policy.playlist_short.id\n+ cache_policy_id = aws_cloudfront_cache_policy.shared_media.id"
+    },
+    {
+      "id": "streaming-139",
+      "number": 139,
+      "title": "Shorten packager segment retention",
+      "repository": "brightward-demo/video-packager",
+      "author": "eli-demo",
+      "merged_at": "2026-10-06T19:25:00Z",
+      "deployment": "Merged only; no deployment record supplied.",
+      "relevance": "Possible contributor",
+      "possible_reason": "If deployed, shorter retention could remove segments still referenced by a playlist and produce 404s.",
+      "verify": "Confirm the running retention setting and trace a failed segment to its referencing playlist before attributing the failures to this PR.",
+      "file": "config/production/packager.yaml",
+      "diff": "@@ live output @@\n- segment_retention_seconds: 900\n+ segment_retention_seconds: 180"
+    },
+    {
+      "id": "streaming-140",
+      "number": 140,
+      "title": "Clarify staging dashboard ownership",
+      "repository": "brightward-demo/delivery-infra",
+      "author": "noah-demo",
+      "merged_at": "2026-10-06T19:28:00Z",
+      "deployment": "Documentation only; no runtime deployment.",
+      "relevance": "Lower relevance",
+      "possible_reason": "This documentation edit has no identified path to live playlist or segment behavior.",
+      "verify": "Keep it as timeline context; do not treat proximity to the incident as causation.",
+      "file": "docs/staging-dashboard.md",
+      "diff": "@@ ownership @@\n- Owner: platform\n+ Owner: streaming-observability"
+    }
+  ],
+  "compute": [
+    {
+      "id": "compute-287",
+      "number": 287,
+      "title": "Enable verbose session request logging",
+      "repository": "brightward-demo/session-api",
+      "author": "ava-demo",
+      "merged_at": "2026-10-06T19:44:00Z",
+      "deployment": "Release completed at 19:50 UTC; effective host configuration unverified.",
+      "relevance": "Possible contributor",
+      "possible_reason": "If active, verbose per-request logs could accelerate disk growth and contribute to application failures.",
+      "verify": "Inspect growing files, active logging level, rotation, write errors and inode use on ns-session-42. Passing EC2 status checks do not confirm application health.",
+      "file": "deploy/production/session-api.env",
+      "diff": "@@ session logging @@\n- LOG_LEVEL=info\n- LOG_REQUEST_DETAILS=false\n+ LOG_LEVEL=debug\n+ LOG_REQUEST_DETAILS=true"
+    },
+    {
+      "id": "compute-284",
+      "number": 284,
+      "title": "Retain additional local release artifacts",
+      "repository": "brightward-demo/session-deploy",
+      "author": "leo-demo",
+      "merged_at": "2026-10-06T19:40:00Z",
+      "deployment": "Merged only; execution on ns-session-42 unverified.",
+      "relevance": "Possible contributor",
+      "possible_reason": "If this deployment setting ran, retained artifacts could consume disk independently of log growth.",
+      "verify": "Compare release-directory and log-directory sizes, deployment job output and file growth. This is a competing explanation, not confirmation.",
+      "file": "deploy/retention.yaml",
+      "diff": "@@ local release retention @@\n- keep_releases: 3\n+ keep_releases: 20"
+    },
+    {
+      "id": "compute-286",
+      "number": 286,
+      "title": "Update staging cost-allocation tags",
+      "repository": "brightward-demo/session-infra",
+      "author": "maya-demo",
+      "merged_at": "2026-10-06T19:43:00Z",
+      "deployment": "Staging plan only; no production apply recorded.",
+      "relevance": "Lower relevance",
+      "possible_reason": "A staging-only metadata change has no identified connection to the production root filesystem.",
+      "verify": "Verify environment scope before treating this change as relevant.",
+      "file": "terraform/staging/tags.tf",
+      "diff": "@@ staging tags @@\n- CostCenter = \"platform\"\n+ CostCenter = \"streaming-staging\""
+    }
+  ],
+  "database": [
+    {
+      "id": "database-318",
+      "number": 318,
+      "title": "Increase catalog database pool capacity",
+      "repository": "brightward-demo/catalog-api",
+      "author": "maya-demo",
+      "merged_at": "2026-10-06T20:08:00Z",
+      "deployment": "Catalog deployment submitted at 20:11 UTC; running pool value and rollout unverified.",
+      "relevance": "Possible contributor",
+      "possible_reason": "If deployed, a larger per-process pool combined with replica growth could exceed the shared RDS connection budget even at moderate CPU.",
+      "verify": "Confirm effective pool maximum, processes per replica, rollout overlap, session ownership and all other clients before calculating demand.",
+      "file": "deploy/production/catalog.yaml",
+      "diff": "@@ catalog environment @@\n- DB_POOL_MAX: \"15\"\n+ DB_POOL_MAX: \"40\"\n  DB_POOL_ACQUIRE_TIMEOUT_MS: \"3000\""
+    },
+    {
+      "id": "database-311",
+      "number": 311,
+      "title": "Keep catalog export transaction open during object upload",
+      "repository": "brightward-demo/catalog-worker",
+      "author": "eli-demo",
+      "merged_at": "2026-10-06T20:05:00Z",
+      "deployment": "Merged only; worker deployment and job execution unverified.",
+      "relevance": "Possible contributor",
+      "possible_reason": "If running, external upload inside a transaction could hold sessions longer and contribute to pool waits or lock contention.",
+      "verify": "Confirm worker deployment, active jobs, transaction age, wait events and session ownership; do not infer a blocker from this diff alone.",
+      "file": "jobs/catalog_export.py",
+      "diff": "@@ export_catalog @@\n  with database.transaction() as tx:\n      rows = tx.fetch_catalog()\n- upload_export(rows)\n+     upload_export(rows)"
+    },
+    {
+      "id": "database-316",
+      "number": 316,
+      "title": "Tag staging database cost allocation",
+      "repository": "brightward-demo/database-infra",
+      "author": "sam-demo",
+      "merged_at": "2026-10-06T19:58:00Z",
+      "deployment": "Staging only; no production change.",
+      "relevance": "Low relevance",
+      "possible_reason": "A staging resource tag does not explain production catalog connection pressure.",
+      "verify": "Check environment and resource identity; exclude this record from production causal claims.",
+      "file": "terraform/staging/rds.tf",
+      "diff": "@@ tags @@\n+ CostCenter = \"catalog-staging\""
+    }
+  ]
+}

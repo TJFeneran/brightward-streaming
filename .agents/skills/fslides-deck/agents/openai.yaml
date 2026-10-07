@@ -1,0 +1,4 @@
+interface:
+  display_name: "fslides authoring"
+  short_description: "Create and edit fslides HTML decks in Brightward"
+  default_prompt: "Use $fslides-deck for the fslides work I request."

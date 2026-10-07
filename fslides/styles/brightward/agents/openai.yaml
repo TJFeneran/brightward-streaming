@@ -1,0 +1,5 @@
+interface:
+  display_name: "Brightward slide style"
+  short_description: "Brightward identity and readable fslides diagrams"
+  brand_color: "#5EEAD4"
+  default_prompt: "Use $fslides-style-brightward to style the fslides content I provide."

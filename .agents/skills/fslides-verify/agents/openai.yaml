@@ -1,0 +1,4 @@
+interface:
+  display_name: "fslides verification"
+  short_description: "Inspect rendered slides, density and visible word counts"
+  default_prompt: "Use $fslides-verify for the fslides work I request."

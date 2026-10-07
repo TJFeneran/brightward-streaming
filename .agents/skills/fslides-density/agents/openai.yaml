@@ -1,0 +1,4 @@
+interface:
+  display_name: "fslides density"
+  short_description: "Choose presentation detail with optional density levels"
+  default_prompt: "Use $fslides-density for the fslides work I request."
