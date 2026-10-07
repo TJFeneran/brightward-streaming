@@ -20,3 +20,6 @@ and future capabilities honestly. The approved demo runs between slides 2 and 3.
 
 Keep credentials, `.northstar` state, environments and generated caches out of
 Git. Installation and deck authoring do not enable publishing or a comment gateway.
+
+Keep the repository README free of a "Working files" section. TJ explicitly
+requested its removal and does not want it reintroduced in future updates.
