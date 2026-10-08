@@ -24,19 +24,12 @@ The default model is `gpt-5.4-mini` for triage and source explanations, overrida
 
 ## Presentation and script
 
-The current [speaking script](Brightward-Speaking-Script.txt) is TJ’s revision 8.
 TJ reported a stopwatch rehearsal under five minutes; segment labels total
 4:51. The final script and current four slide files are locked; preserve their
 content and layout. Present the [animated deck](fslides/README.md) with the app walkthrough,
 then the Platform Agents walkthrough, between slides 2 and 3. The original
 four-page PDF is preserved from draft 7; PDF exports remain deferred.
 
-The shared script source is `presentation/content.json`. Update the annotated
-narration, plain-text script and speaker notes without replacing the PDF:
-
-```sh
-python3 tools/build-slides-pdf.py --narration-only
-```
 
 After editing slides or notes, refresh the portable HTML copy using the pinned
 launcher:
